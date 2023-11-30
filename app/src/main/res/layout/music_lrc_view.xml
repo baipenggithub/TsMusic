@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchMatch">
+
+        <com.ts.music.customview.MusicLrcView
+            android:id="@+id/lrcView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:currentIndicateLrcColor="@color/white"
+            app:indicatorTextColor="@color/indicator_text_color"
+            app:lrcLineSpaceSize="@dimen/music_lrc_line_space_size"
+            app:isLrcCurrentTextBold="true"
+            app:isLrcIndicatorTextBold="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lrcCurrentTextColor="@color/top_tab_bar_light"
+            app:indicatorStartEndMargin="@dimen/music_lrc_view_indicator_start_margin"
+            app:iconLineGap="@dimen/music_lrc_view_icon_line_gap"
+            app:lrcTextSize="@dimen/music_lrc_view_text_size"
+            app:noLrcTextColor="@color/white"
+            app:playIcon="@drawable/music_ic_lyrics" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

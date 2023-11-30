@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/usb_music_fragment"
+        style="@style/MatchMatch"
+        android:descendantFocusability="blocksDescendants">
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/music_lrc_group"
+            style="@style/WrapWrap"
+            android:visibility="gone"
+            app:constraint_referenced_ids="music_lrc_view" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/usb_label_group"
+            style="@style/WrapWrap"
+            isVisible="@{viewModel.mIsUsbLabelAvailable}"
+            app:constraint_referenced_ids="usb_label" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/song_search_group"
+            style="@style/WrapWrap"
+            android:visibility="gone"
+            app:constraint_referenced_ids="song_list_search" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/fragment_song_list_group"
+            style="@style/WrapWrap"
+            app:constraint_referenced_ids="fragment_song_list" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/usb_music_loading_group"
+            style="@style/WrapWrap"
+            app:constraint_referenced_ids="usb_music_loading" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/usb_music_scanning_completed_group"
+            style="@style/WrapWrap"
+            android:visibility="gone"
+            app:constraint_referenced_ids="usb_music_scanning_completed" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/usb_music_back_folder_group"
+            style="@style/WrapWrap"
+            android:visibility="gone"
+            app:constraint_referenced_ids="usb_music_back_folder" />
+
+        <include
+            android:id="@+id/song_list_search"
+            layout="@layout/song_list_search_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/music_song_list_search_view"
+            app:layout_constraintTop_toBottomOf="@+id/usb_label"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            android:id="@+id/music_lrc_view"
+            layout="@layout/music_lrc_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_width"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_player" />
+
+        <include
+            android:id="@+id/fragment_player"
+            layout="@layout/music_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/fragment_usb_music_top_height"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            android:id="@+id/usb_label"
+            layout="@layout/usb_label_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/usb_label_height"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_player"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            android:id="@+id/usb_music_loading"
+            layout="@layout/usb_music_loading_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_width"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usb_label" />
+
+        <include
+            android:id="@+id/usb_music_scanning_completed"
+            layout="@layout/usb_music_scanning_completed_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_width"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usb_label" />
+
+        <LinearLayout
+            android:id="@+id/song_list_shrink_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/song_list_shrink_btn_height"
+            android:visibility="gone"
+            android:background="@color/list_shrink_bg"
+            android:alpha="@integer/opacity"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="@id/usb_music_fragment">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/song_list_shrink_btn"/>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/song_list_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/song_list_shrink_btn_height"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            android:background="@color/color_primary"
+            android:alpha="@integer/opacity" />
+
+        <include
+            android:id="@+id/usb_music_back_folder"
+            layout="@layout/usb_music_back_folder_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/music_list_item_view_height"
+            app:layout_constraintTop_toBottomOf="@+id/song_list_search"
+            app:viewModel="@{viewModel}" />
+
+        <include
+            android:id="@+id/fragment_song_list"
+            layout="@layout/music_song_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/recyclerview_no_height"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usb_music_back_folder"
+            app:viewModel="@{viewModel}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicViewModel" />
+    </data>
+</layout>

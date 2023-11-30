@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_primary">@android:color/black</color>
+    <color name="color_primary_dark">@android:color/black</color>
+    <color name="color_accent">#D81B60</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="light_black">#1affffff</color>
+    <color name="dark_grey">#66000000</color>
+    <color name="player_fragment_bg">#00000000</color>
+    <color name="top_tab_bar_light">#72E5FF</color>
+    <color name="light_grey">#80FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="indicator_text_color">#FF888888</color>
+    <color name="music_bottom_seek_bg">#33FFFFFF</color>
+    <color name="music_bottom_seek_secondary_progress">#1AFFFFFF</color>
+    <color name="music_bottom_seek_progress">#3BAAFA</color>
+    <color name="music_bottom_seek_thumb">#DBDBDB</color>
+    <color name="music_song_list_sum_text_bac">#262B35</color>
+    <color name="music_usb_label_bac_color">#2E2F31</color>
+    <color name="music_search_info">#80FFFFFF</color>
+    <color name="bt_song_sum">#0DD8D8D8</color>
+    <color name="music_toast_color">#1A1A1A</color>
+    <color name="toast_bg_color">#E6FFFFFF</color>
+    <color name="a2dp_prompt_tv_alpha">#7fffffff</color>
+    <color name="music_bottom_seek_progress_start">#ff4b4aba</color>
+    <color name="music_bottom_seek_progress_end">#ff3baafa</color>
+    <color name="colorBgBlack">#ff181818</color>
+    <color name="lrc_scroll">#38D8D8D8</color>
+    <color name="loading_wait_text">#FFFFFF</color>
+    <color name="separated_line">#10D8D8D8</color>
+    <color name="list_shrink_bg">#2F3031</color>
+</resources>

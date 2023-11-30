@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="1920dp"
+        android:layout_height="1080dp"
+        android:background="@drawable/bg_media_background">
+
+        <FrameLayout
+            android:id="@+id/content_frame_layout"
+            android:layout_width="1360dp"
+            android:layout_height="818dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginLeft="37dp"
+            app:layout_constraintStart_toEndOf="@+id/top_tab_bar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/top_tab_bar"
+            android:layout_width="360dp"
+            android:layout_height="818dp"
+            android:descendantFocusability="blocksDescendants"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="76dp"
+            android:layout_marginLeft="73dp"
+            android:background="@drawable/bg_menu"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/rbBtMusic"
+                android:layout_width="366dp"
+                android:layout_height="80dp"
+                android:button="@null"
+                android:gravity="left|center"
+                android:drawableStart="@drawable/selector_bluetooth"
+                android:drawableEnd="@drawable/icon_selector_rb"
+                android:paddingEnd="25dp"
+                android:text="Bluetooth Music"
+                android:drawablePadding="10dp"
+                android:textColor="@color/bg_rb_tv_color"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:paddingStart="26dp"
+                android:textSize="28sp" />
+
+
+            <RadioButton
+                android:id="@+id/rbUsbMusic"
+                android:layout_width="366dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:gravity="left|center"
+                android:text="USB Music"
+                android:layout_marginBottom="30dp"
+                android:drawableEnd="@drawable/icon_selector_rb"
+                android:paddingEnd="25dp"
+                android:textSize="28sp"
+                android:textColor="@color/bg_rb_tv_color"
+                android:drawableStart="@drawable/selector_usb"
+                android:paddingStart="26dp"
+                android:drawablePadding="10dp"/>
+
+            <RadioButton
+                android:id="@+id/rbRadio"
+                android:layout_width="366dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:gravity="left|center"
+                android:text="radio station"
+                android:textSize="28sp"
+                android:textColor="@color/bg_rb_tv_color"
+                android:paddingEnd="25dp"
+                android:drawablePadding="10dp"
+                android:paddingStart="26dp"
+                android:drawableStart="@drawable/selector_radio" />
+        </RadioGroup>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+    </data>
+</layout>

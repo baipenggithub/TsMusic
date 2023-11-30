@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:AudioPlayerAnimation="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linearLayout"
+    android:background="@color/music_bottom_seek_bg"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/music_list_item_view_height"
+    android:paddingEnd="@dimen/music_song_list_item_ic_right">
+
+    <ImageView
+        android:id="@+id/songListLeftIcon"
+        android:layout_width="@dimen/music_song_list_item_ic_width"
+        android:layout_height="@dimen/music_song_list_item_ic_height"
+        android:scaleType="fitXY"
+        android:src="@drawable/usb_music_ic_item_no_album"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/songListSum"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/songListSum"
+        android:layout_width="@dimen/music_song_list_num_width"
+        android:layout_height="wrap_content"
+        android:textColor="@color/light_grey"
+        android:textSize="@dimen/fragment_bt_exception_bt_bt_size"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ts.music.customview.SongListMarquee
+        android:id="@+id/audioName"
+        android:layout_width="@dimen/no_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/music_song_list_left_ic_margin_right"
+        android:layout_marginEnd="@dimen/music_song_list_margin_right"
+        android:focusable="false"
+        android:minHeight="@dimen/music_song_list_item_max_height"
+        android:singleLine="true"
+        android:text="@string/audio_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/music_song_list_item_ic_left"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/songListLeftIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ImageView
+        android:id="@+id/songListRightIcon"
+        android:layout_width="@dimen/music_song_list_item_ic_paying"
+        android:layout_height="@dimen/music_song_list_item_ic_paying"
+        android:src="@drawable/drawable_sport_anim_playing"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

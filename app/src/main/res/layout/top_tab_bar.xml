@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchWrap"
+        android:background="@color/dark_grey">
+
+        <RelativeLayout
+            android:id="@+id/rlBtMusic"
+            onClickCommand="@{viewModel.btMusic}"
+            android:layout_width="@dimen/top_tab_bar_width"
+            android:layout_height="@dimen/top_tab_bar_height"
+            tools:ignore="MissingConstraints"
+            android:background="@drawable/top_tab_bar_bg">
+
+            <RadioButton
+                android:id="@+id/rbBtMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:checked="true"
+                android:clickable="false"
+                android:text="@string/bt_music"
+                android:textSize="@dimen/top_tab_bar_tv_size"
+                android:textColor="@drawable/shap_top_bar_text_color" />
+
+            <View
+                android:id="@+id/viewBtMusic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_tab_bar_view_height"
+                android:layout_alignParentBottom="true"
+                android:background="@color/top_tab_bar_light" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlOnlineMusicMusic"
+            onClickCommand="@{viewModel.onlineMusic}"
+            android:layout_width="@dimen/top_tab_bar_width"
+            android:layout_height="@dimen/top_tab_bar_height"
+            app:layout_constraintLeft_toRightOf="@+id/rlBtMusic"
+            app:layout_constraintRight_toLeftOf="@+id/rlUsbMusic"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/rbRadio"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:clickable="false"
+                android:text="@string/online_music"
+                android:textSize="@dimen/top_tab_bar_tv_size"
+                android:textColor="@drawable/shap_top_bar_text_color" />
+
+            <View
+                android:id="@+id/viewOnlineMusic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_tab_bar_view_height"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlUsbMusic"
+            onClickCommand="@{viewModel.usbMusic}"
+            android:layout_width="@dimen/top_tab_bar_width"
+            android:layout_height="@dimen/top_tab_bar_height"
+            app:layout_constraintLeft_toRightOf="@+id/rlOnlineMusicMusic"
+            tools:ignore="MissingConstraints">
+
+            <RadioButton
+                android:id="@+id/rbUsbMusic"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:button="@null"
+                android:clickable="false"
+                android:text="@string/usb_music"
+                android:textSize="@dimen/top_tab_bar_tv_size"
+                android:textColor="@drawable/shap_top_bar_text_color" />
+
+            <View
+                android:id="@+id/viewUsbMusic"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/top_tab_bar_view_height"
+                android:layout_alignParentBottom="true"
+                android:background="@android:color/transparent" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.MusicActivityViewModel" />
+    </data>
+</layout>

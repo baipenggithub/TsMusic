@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="@dimen/player_width"
+        android:layout_height="@dimen/player_height"
+        android:background="@color/player_fragment_bg">
+
+        <ImageView
+            android:id="@+id/sheet"
+            android:layout_width="@dimen/player_function_iv_side"
+            android:layout_height="@dimen/player_function_iv_side"
+            android:layout_marginStart="@dimen/music_player_lyric_margin_start"
+            android:layout_marginBottom="@dimen/music_player_lyric_margin_top"
+            android:enabled="false"
+            android:src="@drawable/lyric_disable"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/play_previous"
+            onClickCommand="@{viewModel.playerLastMusic}"
+            android:layout_width="@dimen/player_switch_song_iv_side"
+            android:layout_height="@dimen/player_switch_song_iv_side"
+            android:layout_marginStart="@dimen/music_player_previous_margin_start"
+            android:layout_marginBottom="@dimen/music_player_previous_margin_bottom"
+            android:enabled="@{viewModel.isValidAudioName}"
+            android:src="@drawable/prev_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/sheet"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/play"
+            onClickCommand="@{viewModel.playerPlayOrPause}"
+            android:layout_width="@dimen/player_play_song_iv_height"
+            android:layout_height="@dimen/player_play_song_iv_side"
+            android:layout_marginStart="@dimen/music_player_iv_margin_start"
+            android:layout_marginBottom="@dimen/music_player_iv_margin_top"
+            android:enabled="@{viewModel.isValidAudioName}"
+            android:src="@{viewModel.IsPlay ? @drawable/suspend_selector : @drawable/play_selector}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/play_previous"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/play_next"
+            onClickCommand="@{viewModel.playerNext}"
+            android:layout_width="@dimen/player_switch_song_iv_side"
+            android:layout_height="@dimen/player_switch_song_iv_side"
+            android:layout_marginStart="@dimen/music_player_next_margin_right"
+            android:layout_marginBottom="@dimen/music_player_previous_margin_bottom"
+            android:enabled="@{viewModel.isValidAudioName}"
+            android:src="@drawable/next_selector"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/play"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:layout_width="@dimen/player_album_cover_bg_side"
+            android:layout_height="@dimen/player_album_cover_bg_side"
+            android:layout_marginTop="@dimen/player_album_bg_marginTop"
+            android:layout_marginEnd="@dimen/player_album_bg_marginEnd"
+            android:src="@drawable/music_cover_bg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/album_cover"
+            android:layout_width="@dimen/player_album_cover_side"
+            android:layout_height="@dimen/player_album_cover_side"
+            android:layout_marginTop="@dimen/player_album_marginTop"
+            android:layout_marginEnd="@dimen/player_album_marginEnd"
+            android:enabled="@{viewModel.isValidAudioName}"
+            android:src="@drawable/no_music"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <SeekBar
+            android:id="@+id/music_seek_bar"
+            style="@style/MusicSeekBarStyle"
+            android:layout_marginStart="@dimen/player_seek_bar_marginStart"
+            android:layout_marginTop="@dimen/player_seek_bar_marginTop"
+            android:layout_marginEnd="@dimen/player_seek_bar_marginStart"
+            android:layout_marginBottom="@dimen/player_seek_bar_marginTop"
+            android:max="100"
+            android:progress="@{viewModel.seekBarProgress}"
+            app:layout_constraintBottom_toTopOf="@+id/play"
+            app:layout_constraintLeft_toRightOf="@+id/music_current_time"
+            app:layout_constraintTop_toBottomOf="@id/nick_name"
+            tools:ignore="MissingConstraints" />
+
+        <com.ts.music.customview.MarqueeTextView
+            android:id="@+id/audio_name"
+            style="@style/AudioName"
+            android:focusable="true"
+            android:singleLine="true"
+            android:text="@{viewModel.audioName}"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <com.ts.music.customview.MarqueeTextView
+            android:id="@+id/nick_name"
+            style="@style/NickName"
+            android:focusable="true"
+            android:singleLine="true"
+            android:text="@{viewModel.nickName}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/audio_name"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/music_current_time"
+            style="@style/MusicTimeStyle"
+            android:layout_marginStart="@dimen/player_current_time_marginStart"
+            android:layout_marginTop="@dimen/player_current_time_marginTop"
+            android:layout_marginBottom="@dimen/player_current_time_marginTop"
+            android:text="@{viewModel.currentTime}"
+            android:textColor="@color/light_grey"
+            app:layout_constraintBottom_toTopOf="@+id/play"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nick_name"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/music_total_time"
+            style="@style/MusicTimeStyle"
+            android:layout_marginTop="@dimen/player_total_time_marginTop"
+            android:layout_marginBottom="@dimen/player_total_time_marginTop"
+            android:text="@{viewModel.totalTime}"
+            android:textColor="@color/light_grey"
+            app:layout_constraintBottom_toTopOf="@+id/play"
+            app:layout_constraintLeft_toRightOf="@+id/music_seek_bar"
+            app:layout_constraintTop_toBottomOf="@id/nick_name"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.BtMusicViewModel" />
+    </data>
+</layout>

@@ -1,0 +1,74 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:windowBackground">@color/colorBgBlack</item>
+    </style>
+
+    <!--Player time progress bar style-->
+    <style name="MusicSeekBarStyle">
+        <item name="android:layout_width">@dimen/player_seek_bar_width</item>
+        <item name="android:layout_height">@dimen/player_seek_bar_height</item>
+        <item name="android:background">@null</item>
+        <item name="android:maxHeight">@dimen/seek_bar_style_max_height</item>
+        <item name="android:minHeight">@dimen/seek_bar_style_min_height</item>
+        <item name="android:progressDrawable">@drawable/music_bottom_seek_progress</item>
+        <item name="android:thumb">@drawable/music_bottom_seek_thumb</item>
+        <item name="android:splitTrack">false</item>
+    </style>
+
+    <!--Player time font style-->
+    <style name="MusicTimeStyle">
+        <item name="android:layout_width">@dimen/time_style_text_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/time_style_text_size</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="AudioName">
+        <item name="android:layout_width">@dimen/audio_name_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/audio_name_marginStart</item>
+        <item name="android:layout_marginTop">@dimen/audio_name_marginTop</item>
+        <item name="android:layout_marginEnd">@dimen/audio_name_marginEnd</item>
+        <item name="android:textSize">@dimen/audio_name</item>
+    </style>
+
+    <style name="NickName">
+        <item name="android:layout_marginTop">@dimen/nick_name_marginTop</item>
+        <item name="android:layout_width">@dimen/nick_name_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/nick_name_marginStart</item>
+        <item name="android:layout_marginEnd">@dimen/nick_name_marginEnd</item>
+        <item name="android:textSize">@dimen/nick_name</item>
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+
+    <style name="Translucent">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+</resources>

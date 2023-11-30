@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchMatch"
+        android:id="@+id/searchRoot"
+        android:background="@drawable/main_bg"
+        android:clickable="true"
+        android:defaultFocusHighlightEnabled="false">
+
+        <EditText
+            android:id="@+id/et_music_search"
+            android:layout_width="@dimen/music_search_input_width"
+            android:layout_height="@dimen/music_search_input_height"
+            android:layout_marginStart="@dimen/music_search_input_margin_left"
+            android:layout_marginTop="@dimen/music_search_input_margin_top"
+            android:background="@drawable/music_search_input_bg"
+            android:hint="@string/music_search"
+            android:maxLength="@integer/edit_max_length"
+            android:paddingStart="@dimen/music_search_input_padding_left"
+            android:paddingEnd="@dimen/music_ic_search_delete_padding"
+            android:singleLine="true"
+            android:text="@={viewModel.mKeywordSearch}"
+            android:textColor="@color/white"
+            android:textColorHint="@color/music_bottom_seek_secondary_progress"
+            android:textCursorDrawable="@drawable/music_search_cursor_color"
+            android:textSize="@dimen/music_search_input_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:imeOptions="actionSearch"/>
+
+        <ImageView
+            android:id="@+id/iv_search_back"
+            onClickCommand="@{viewModel.backCommand}"
+            android:layout_width="@dimen/music_ic_search_iv_width"
+            android:layout_height="@dimen/music_ic_search_iv_height"
+            android:layout_marginStart="@dimen/music_ic_search_iv_margin_left"
+            android:layout_marginTop="@dimen/music_ic_search_iv_margin_top"
+            android:src="@drawable/music_search_btn_back"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_search_delete"
+            onClickCommand="@{viewModel.deleteKeywordSearchCommand}"
+            android:layout_width="@dimen/music_search_del_width"
+            android:layout_height="@dimen/music_search_del_height"
+            android:layout_marginEnd="@dimen/music_search_del_margin_right"
+            android:src="@drawable/music_ic_search_delete"
+            android:visibility="@{viewModel.mKeywordSearch.length()>0?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@id/et_music_search"
+            app:layout_constraintRight_toRightOf="@+id/et_music_search"
+            app:layout_constraintTop_toTopOf="@+id/et_music_search" />
+
+        <ImageView
+            android:id="@+id/iv_search_result"
+            onClickCommand="@{viewModel.keywordSearchResultCommand}"
+            android:layout_width="@dimen/music_search_start_height"
+            android:layout_height="@dimen/music_search_start_height"
+            android:layout_marginRight="@dimen/music_search_start_margin_left"
+            android:src="@drawable/et_search"
+            app:layout_constraintBottom_toBottomOf="@id/et_music_search"
+            app:layout_constraintRight_toRightOf="@+id/et_music_search"
+            app:layout_constraintTop_toTopOf="@+id/et_music_search" />
+
+        <TextView
+            android:id="@+id/tv_search_info"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/music_search_text_info_height"
+            android:layout_marginTop="@dimen/music_search_text_info_margin_top"
+            android:textSize="@dimen/music_search_text_info_size"
+            android:textColor="@color/music_search_info"
+            android:gravity="center_horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_music_search"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/music_search_recycler_margin_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_music_search">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/mRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadingEdge="none"
+                android:overScrollMode="never"
+                android:scrollbarSize="@dimen/list_scrollbar_size"
+                android:scrollbarStyle="outsideInset"
+                android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+                android:scrollbars="vertical" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicSearchViewModel" />
+    </data>
+</layout>

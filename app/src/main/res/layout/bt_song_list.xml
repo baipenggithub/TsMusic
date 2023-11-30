@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/MatchMatch">
+
+        <ImageView
+            android:id="@+id/no_play_list"
+            android:layout_width="@dimen/fragment_bt_exception_bt_iv_side"
+            android:layout_height="@dimen/fragment_bt_exception_bt_iv_side"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/fragment_sheet_exception_bt_iv_top"
+            android:src="@drawable/sheet_exception"
+            android:visibility="@{!viewModel.listHasData ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/bt_tv"
+            android:layout_width="@dimen/fragment_exception_tv_width"
+            android:layout_height="@dimen/fragment_exception_tv_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/fragment_bt_exception_bt_tv_top"
+            android:gravity="center"
+            android:text="@string/bt_sheet_tv"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fragment_exception_tv_size"
+            android:visibility="@{!viewModel.listHasData ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/no_play_list"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/song_sum"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/song_sum_height"
+            android:layout_centerVertical="true"
+            android:background="@color/bt_song_sum"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/song_sum_padding_left"
+            android:text="@{viewModel.sumSongs}"
+            android:textColor="@color/light_grey"
+            android:textSize="@dimen/sum_songs"
+            android:visibility="@{viewModel.listHasData ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="MissingConstraints" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bt_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/song_sum_height"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:visibility="@{viewModel.listHasData ? View.VISIBLE : View.GONE}"
+            app:fastScrollEnabled="true"
+            app:fastScrollHorizontalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollHorizontalTrackDrawable="@color/color_transparent"
+            app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
+            app:fastScrollVerticalTrackDrawable="@color/color_transparent"
+            app:layout_constraintBottom_toBottomOf="@id/song_sum"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.BtMusicViewModel" />
+    </data>
+</layout>

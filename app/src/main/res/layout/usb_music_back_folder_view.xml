@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/music_list_item_view_height"
+        android:paddingStart="@dimen/music_song_list_item_ic_left"
+        android:paddingEnd="@dimen/music_song_list_item_ic_right">
+
+        <ImageView
+            android:id="@+id/ivBackFolder"
+            onClickCommand="@{viewModel.folderBackCommand}"
+            android:layout_width="@dimen/music_song_list_item_ic_width"
+            android:layout_height="@dimen/music_song_list_item_ic_height"
+            android:layout_marginStart="@dimen/music_song_list_item_ic_right"
+            android:scaleType="fitXY"
+            android:src="@drawable/usb_music_ic_back_file"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/tvFolderPathContainer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/music_folder_back_height"
+            android:layout_marginStart="@dimen/music_search_container_margin_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:overScrollMode="never"
+            app:layout_constraintStart_toEndOf="@+id/ivBackFolder"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvFolderPath"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/music_song_list_item_ic_left" />
+
+                <View
+                    android:layout_width="@dimen/music_search_container_view_width"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/music_search_container_view_left" />
+
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/music_recycler_view_lin_height"
+            android:background="@drawable/shape_recycler_view_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicViewModel" />
+
+    </data>
+</layout>

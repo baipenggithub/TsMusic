@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout style="@style/MatchMatch">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/firstUsbRlv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:scrollbarSize="@dimen/list_scrollbar_size"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/secondUsbRlv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            android:scrollbarSize="@dimen/list_scrollbar_size"
+            android:scrollbarStyle="outsideInset"
+            android:scrollbarThumbVertical="@drawable/scrollbar_vertical_thumb"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicViewModel" />
+    </data>
+</layout>

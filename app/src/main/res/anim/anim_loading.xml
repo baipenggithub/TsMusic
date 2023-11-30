@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="@integer/loading_anim_duration"
+    android:fillAfter="true"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:repeatCount="infinite"
+    android:repeatMode="restart"
+    android:startOffset="@integer/zero"
+    android:fromDegrees="@integer/zero"
+    android:toDegrees="360">
+</rotate>

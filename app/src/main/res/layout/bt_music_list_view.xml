@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchMatch">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/mRecyclerView"
+            style="@style/MatchMatch"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.BtMusicViewModel" />
+    </data>
+</layout>

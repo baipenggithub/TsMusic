@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/switch_audio_dialog"
+        android:layout_width="@dimen/switch_audio_dialog_width"
+        android:layout_height="@dimen/switch_audio_dialog_height"
+        android:layout_marginStart="@dimen/switch_audio_dialog_marginStart"
+        android:layout_marginTop="@dimen/switch_audio_dialog_marginTop"
+        android:layout_marginEnd="@dimen/switch_audio_dialog_marginEnd"
+        android:layout_marginBottom="@dimen/switch_audio_dialog_marginBottom"
+        android:background="@drawable/layout_rectane"
+        android:clipToPadding="false"
+        android:foregroundGravity="center_vertical|center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewSwitchAlert"
+            android:layout_width="@dimen/switch_audio_dialog_tv_width"
+            android:layout_height="@dimen/switch_audio_dialog_tv_height"
+            android:layout_marginStart="@dimen/switch_audio_dialog_tv_margin_Start"
+            android:layout_marginTop="@dimen/switch_audio_dialog_tv_margin_Top"
+            android:layout_marginEnd="@dimen/switch_audio_dialog_tv_margin_End"
+            android:layout_marginBottom="@dimen/switch_audio_dialog_tv_margin_Bottom"
+            android:text="@string/switch_to_bt"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/switch_audio_dialog_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/button_ok"
+            android:layout_width="@dimen/switch_audio_dialog_button_width"
+            android:layout_height="@dimen/switch_audio_dialog_button_height"
+            android:layout_marginVertical="@dimen/switch_audio_dialog_button_marginVertical"
+            android:layout_marginLeft="@dimen/switch_audio_dialog_button_ok_marginLeft"
+            android:layout_marginTop="@dimen/switch_audio_dialog_button_marginTop"
+            android:layout_marginRight="@dimen/switch_audio_dialog_button_ok_margin"
+            android:layout_marginBottom="@dimen/switch_audio_dialog_button_marginBottom"
+            android:background="@drawable/button_affirm"
+            android:text="@string/button_ok"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/button_deny"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSwitchAlert"
+            app:layout_constraintVertical_bias="0.586" />
+
+        <Button
+            android:id="@+id/button_deny"
+            android:layout_width="@dimen/switch_audio_dialog_button_width"
+            android:layout_height="@dimen/switch_audio_dialog_button_height"
+            android:layout_marginVertical="@dimen/switch_audio_dialog_button_marginVertical"
+            android:layout_marginLeft="@dimen/switch_audio_dialog_button_deny_marginLeft"
+            android:layout_marginTop="@dimen/switch_audio_dialog_button_marginTop"
+            android:layout_marginRight="@dimen/switch_audio_dialog_button_deny_marginRight"
+            android:layout_marginBottom="@dimen/switch_audio_dialog_button_marginBottom"
+            android:background="@drawable/button_cancel"
+            android:text="@string/button_deny"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/button_ok"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSwitchAlert"
+            app:layout_constraintVertical_bias="0.555" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

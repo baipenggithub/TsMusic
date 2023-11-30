@@ -1,0 +1,61 @@
+<resources>
+    <attr name="isVisible" format="boolean" />
+    <declare-styleable name="View">
+        <attr name="onClickCommand" format="reference" />
+        <attr name="onLongClickCommand" format="reference" />
+        <attr name="onFocusChangeCommand" format="reference" />
+        <attr name="onTouchCommand" format="reference" />
+        <attr name="isThrottleFirst" format="boolean" />
+        <attr name="currentView" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="TextView">
+        <attr name="beforeTextChangedCommand" format="reference" />
+        <attr name="onTextChangedCommand" format="reference" />
+        <attr name="afterTextChangedCommand" format="reference" />
+        <attr name="textChanged" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ImageView">
+        <attr name="url" format="string" />
+        <attr name="request_width" format="integer" />
+        <attr name="request_height" format="integer" />
+        <attr name="placeholderRes" format="reference|color" />
+        <attr name="onSuccessCommand" format="reference" />
+        <attr name="onFailureCommand" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="RadioGroup">
+        <attr name="onCheckedChangedCommand" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="AudioPlayerAnimation">
+        <attr name="pointer_color" format="color" />
+        <attr name="pointer_num" format="integer" />
+        <attr name="pointer_width" format="float" />
+        <attr name="pointer_speed" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="MusicLrcView">
+        <attr name="lrcTextSize" format="dimension" />
+        <attr name="lrcLineSpaceSize" format="dimension" />
+        <attr name="lrcNormalTextColor" format="reference|color" />
+        <attr name="lrcCurrentTextColor" format="reference|color" />
+        <attr name="lrcTouchDelay" format="integer" />
+        <attr name="noLrcTextSize" format="dimension" />
+        <attr name="noLrcTextColor" format="reference|color" />
+        <attr name="indicatorLineHeight" format="dimension" />
+        <attr name="indicatorTextSize" format="dimension" />
+        <attr name="indicatorTextColor" format="reference|color" />
+        <attr name="currentIndicateLrcColor" format="reference|color" />
+        <attr name="indicatorTouchDelay" format="integer" />
+        <attr name="indicatorLineColor" format="reference|color" />
+        <attr name="indicatorStartEndMargin" format="dimension" />
+        <attr name="iconLineGap" format="dimension" />
+        <attr name="playIconWidth" format="dimension" />
+        <attr name="playIconHeight" format="dimension" />
+        <attr name="playIcon" format="reference" />
+        <attr name="isLrcCurrentTextBold" format="boolean" />
+        <attr name="isLrcIndicatorTextBold" format="boolean" />
+    </declare-styleable>
+</resources>

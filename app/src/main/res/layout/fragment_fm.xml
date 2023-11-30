@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="528dp"
+            android:layout_height="308dp"
+            android:background="@drawable/bg_card"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="227dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="56dp"
+                android:text="FM103.7"
+                android:textColor="#ff272b52"
+                android:textSize="55sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="188dp"
+                android:src="@drawable/icon_radio_80"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView3"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="473dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="104dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="32dp"
+                android:src="@drawable/icon_radio_card"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="528dp"
+            android:layout_height="66dp"
+            android:src="@drawable/bg_bottom_shade"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</layout>

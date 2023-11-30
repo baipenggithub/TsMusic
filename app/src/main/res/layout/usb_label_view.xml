@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bindin="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/usb_label_height"
+        android:background="@color/music_usb_label_bac_color">
+
+        <RadioGroup
+            android:id="@+id/rg_usb_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            bindin:onCheckedChangedCommand="@{viewModel.switchUsbLabel}">
+
+            <RadioButton
+                android:id="@+id/rb_usb_label_first"
+                android:layout_width="@dimen/rb_usb_label_width"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="@string/first_usb_label_name"
+                android:textColor="@drawable/shap_top_bar_text_color"
+                android:textSize="@dimen/music_song_list_text_sum"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioButton
+                android:id="@+id/rb_usb_label_second"
+                android:layout_width="@dimen/rb_usb_label_width"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/second_usb_label_name"
+                android:textColor="@drawable/shap_top_bar_text_color"
+                android:textSize="@dimen/music_song_list_text_sum"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/view_usb_label_first"
+            isVisible="@{viewModel.mIsCheckedFirstUsbLabel}"
+            android:layout_width="@dimen/rb_usb_label_width"
+            android:layout_height="@dimen/top_tab_bar_view_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/top_tab_bar_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <View
+            android:id="@+id/view_usb_label_second"
+            isVisible="@{viewModel.mIsCheckedSecondUsbLabel}"
+            android:layout_width="@dimen/rb_usb_label_width"
+            android:layout_height="@dimen/top_tab_bar_view_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/top_tab_bar_light"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:layout_width="@dimen/usb_label_dividing_line"
+            android:layout_height="match_parent"
+            android:background="@color/light_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicViewModel" />
+
+    </data>
+</layout>

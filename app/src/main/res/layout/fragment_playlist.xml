@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl_top"
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <RadioGroup
+                android:id="@+id/rg_toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_allChannel"
+                    android:layout_width="45dp"
+                    android:layout_height="48dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="FM"
+                    android:textColor="@drawable/selector_toolbar"
+                    android:textSize="28dp" />
+
+                <RadioButton
+                    android:id="@+id/rb_Favorite"
+                    android:layout_width="45dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="98dp"
+                    android:button="@null"
+                    android:gravity="left|center"
+                    android:text="AM"
+                    android:textColor="@drawable/selector_toolbar"
+                    android:textSize="28dp" />
+            </RadioGroup>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_label"
+            android:layout_width="197dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rl_top">
+
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_width="45dp"
+                android:layout_height="4dp"
+                android:background="@drawable/bg_tv_bottomcolor" />
+
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="45dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="93dp"
+                android:background="@drawable/bg_tv_bottomcolor"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/frameLayout2"
+            android:layout_width="582dp"
+            android:layout_height="308dp"
+            android:layout_marginTop="72dp"
+            android:layout_marginBottom="218dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_label" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="43dp"
+            android:layout_marginLeft="80dp"
+            android:src="@drawable/icon_arrow"
+            app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="368dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="43dp"
+            android:text="Currently  channel（10）"
+            android:textColor="#ff272b52"
+            android:textSize="28dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.01" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="749dp"
+            android:layout_height="500dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="26dp"
+            android:id="@+id/mRecyclerView"
+            app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

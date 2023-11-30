@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="edit_max_length">50</integer>
+    <integer name="pointer_num">4</integer>
+    <integer name="pointer_width">4</integer>
+    <integer name="loading_anim_duration">1500</integer>
+    <integer name="zero">0</integer>
+    <integer name="opacity">255</integer>
+</resources>

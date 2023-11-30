@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/music_song_list_search_view"
+        android:background="@color/music_song_list_sum_text_bac">
+
+        <ImageView
+            android:id="@+id/iv_all_player"
+            onClickCommand="@{viewModel.playerAll}"
+            android:layout_width="@dimen/music_song_list_search_width"
+            android:layout_height="@dimen/music_song_list_search_height"
+            android:layout_marginStart="@dimen/iv_all_player_margin_start"
+            android:src="@{viewModel.mIsFolder?@drawable/usb_music_ic_player_all:@drawable/music_search_btn_back}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_search"
+            onClickCommand="@{viewModel.songSearch}"
+            android:layout_width="@dimen/music_song_list_search_width"
+            android:layout_height="@dimen/music_song_list_search_height"
+            android:layout_marginEnd="@dimen/iv_all_player_margin_start"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search" />
+
+        <TextView
+            android:id="@+id/tv_describe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.mListTittle}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/music_song_list_text_sum"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_all_player"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sum"
+            isVisible="@{viewModel.mIsFolder==null?false:viewModel.mIsFolder}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/iv_all_player_margin_start"
+            android:text="@{viewModel.mAudioSum}"
+            android:textColor="@color/light_grey"
+            android:textSize="@dimen/music_all_player_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_describe"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.UsbMusicViewModel" />
+    </data>
+</layout>

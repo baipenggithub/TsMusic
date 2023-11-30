@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/usb_music_ic_exception"
+            android:layout_width="@dimen/fragment_usb_exception_usb_iv_side"
+            android:layout_height="@dimen/fragment_usb_exception_usb_iv_side"
+            android:src="@drawable/usb"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/no_width"
+            android:layout_marginTop="@dimen/fragment_usb_exception_usb_tv_top"
+            android:gravity="center_horizontal"
+            android:text="@string/connect_usb_tv"
+            android:textColor="@color/white"
+            android:textSize="@dimen/fragment_exception_tv_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usb_music_ic_exception"
+            tools:ignore="MissingConstraints" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
