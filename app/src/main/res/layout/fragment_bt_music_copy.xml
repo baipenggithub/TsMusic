@@ -238,17 +238,18 @@
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <include
-                android:id="@+id/no_bt_connect_view"
-                layout="@layout/no_bt_connect_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="@{viewModel.btConnectShowState ? View.GONE : View.VISIBLE}"
-                app:viewModel="@{viewModel}"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp"
-                tools:visibility="gone" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/no_bt_connect_view"
+            layout="@layout/no_bt_connect_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.btConnectShowState ? View.GONE : View.VISIBLE}"
+            app:viewModel="@{viewModel}"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
