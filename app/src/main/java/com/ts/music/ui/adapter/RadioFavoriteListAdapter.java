@@ -1,16 +1,14 @@
 package com.ts.music.ui.adapter;
 
-import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ts.music.databinding.ItemFavoriteradioListBinding;
-import com.ts.music.databinding.ItemRadioListBinding;
+import com.ts.music.R;
 import com.ts.music.entity.RadioBean;
 
 import java.util.ArrayList;
@@ -31,9 +29,9 @@ public class RadioFavoriteListAdapter extends RecyclerView.Adapter<RecyclerView.
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemFavoriteradioListBinding binding = ItemFavoriteradioListBinding
-                .inflate(LayoutInflater.from(parent.getContext()), parent, false);
-        return new RadioViewHolder(binding);
+        View view = null;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favoriteradio_list, parent, false);
+        return new RadioViewHolder(view);
 
     }
 
@@ -41,8 +39,8 @@ public class RadioFavoriteListAdapter extends RecyclerView.Adapter<RecyclerView.
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((RadioViewHolder) holder).bind(mRadioBeanList.get(position));
         holder.itemView.setSelected(selectedItem == position);
-        Log.e(TAG, "onBindViewHolder: "+(selectedItem == position));
-        ((RadioViewHolder) holder).mBinding.radioListItem.setOnClickListener(new View.OnClickListener() {
+//        Log.e(TAG, "onBindViewHolder: "+(selectedItem == position));
+        ((RadioViewHolder) holder).radioListItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 notifyItemChanged(selectedItem); // 取消上一次选中项的背景
@@ -51,9 +49,9 @@ public class RadioFavoriteListAdapter extends RecyclerView.Adapter<RecyclerView.
             }
         });
         if (((RadioViewHolder) holder).itemView.isSelected()){
-            ((RadioViewHolder) holder).mBinding.tvNum.setVisibility(View.INVISIBLE);
+            ((RadioViewHolder) holder).tvNum.setVisibility(View.INVISIBLE);
         }else {
-            ((RadioViewHolder) holder).mBinding.tvNum.setVisibility(View.VISIBLE);
+            ((RadioViewHolder) holder).tvNum.setVisibility(View.VISIBLE);
         }
     }
 
@@ -63,19 +61,19 @@ public class RadioFavoriteListAdapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     public static class RadioViewHolder extends RecyclerView.ViewHolder {
-        private ItemFavoriteradioListBinding mBinding;
+        private TextView tvName , tvNum;
+        private ConstraintLayout radioListItem;
 
-        public RadioViewHolder(@NonNull ItemFavoriteradioListBinding binding) {
-            super(binding.getRoot());
-            mBinding = binding;
+        public RadioViewHolder(@NonNull View itemView) {
+            super(itemView);
+            tvName = itemView.findViewById(R.id.tv_num);
+            tvNum = itemView.findViewById(R.id.tv_num);
+            radioListItem = itemView.findViewById(R.id.radio_list_item);
         }
-        public void bind(RadioBean radioBean) {
-            mBinding.setRadioInfo(radioBean);
-            Context context = mBinding.getRoot().getContext();
-            mBinding.tvName.setText(radioBean.getName());
-            mBinding.tvNum.setText(radioBean.getNum());
 
-            mBinding.executePendingBindings();
+        public void bind(RadioBean radioBean) {
+            tvName.setText(radioBean.getName());
+            tvNum.setText(radioBean.getNum());
         }
     }
 }

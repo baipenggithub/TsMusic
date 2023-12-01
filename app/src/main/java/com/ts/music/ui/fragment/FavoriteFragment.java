@@ -10,11 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.ts.music.BR;
 import com.ts.music.R;
 import com.ts.music.base.BaseFragment;
-import com.ts.music.databinding.FragmentAllchannelBinding;
 import com.ts.music.databinding.FragmentFavoriteBinding;
 import com.ts.music.entity.RadioBean;
 import com.ts.music.ui.adapter.RadioFavoriteListAdapter;
-import com.ts.music.ui.adapter.RadioListAdapter;
 import com.ts.music.ui.viewmodel.AllChannelViewModel;
 
 import java.util.ArrayList;

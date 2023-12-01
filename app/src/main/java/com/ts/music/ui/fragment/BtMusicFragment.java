@@ -2,6 +2,7 @@ package com.ts.music.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -11,6 +12,8 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ts.music.BR;
@@ -24,6 +27,9 @@ import com.ts.music.utils.ConstraintUtil;
 import com.ts.music.utils.LogUtils;
 import com.ts.music.utils.MusicUtils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * BtMusic Fragment.
@@ -36,6 +42,11 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
     private int mPosition = -1;
     private boolean mIsSongListUp = false;
     private ConstraintUtil mConstraintUtil;
+
+    private Fragment currentFragment;
+    private FragmentTransaction ft;
+    private List<Fragment> fragmentList;
+    private NotBtFragment notBtFragment;
 
     /**
      * Use this factory method to create a new instance of
@@ -64,6 +75,40 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
 //            }
 //        });
 //        initRecyclerView();
+        notBtFragment = NotBtFragment.newInstance();
+        fragmentList = new ArrayList<>();
+        fragmentList.add(0,notBtFragment);
+        mBinding.suerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mBinding.btConstraintLayout.setVisibility(View.GONE);
+                switchFragment(0);
+            }
+        });
+    }
+
+    private void  switchFragment(Integer index) {
+        ft= getChildFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.fade_in, R.anim.exit_anim)
+        //判断当前的Fragment是否为空，不为空则隐藏
+        if (null != currentFragment) {
+            ft.hide(currentFragment);
+        }
+        //先根据Tag从FragmentTransaction事物获取之前添加的Fragment
+        Fragment fragment = getChildFragmentManager().findFragmentByTag(
+                fragmentList.get(index).getClass().getSimpleName());
+        if (null == fragment) {
+            //如fragment为空，则之前未添加此Fragment。便从集合中取出
+            fragment = fragmentList.get(index);
+        }
+        currentFragment = fragment;
+        //判断此Fragment是否已经添加到FragmentTransaction事物中
+        if (!fragment.isAdded() && TextUtils.isEmpty(fragment.getTag())) {
+            ft.add(R.id.bt_frameLayout, fragment, fragment.getClass().getName());
+        } else {
+            ft.show(fragment);
+        }
+        ft.commitAllowingStateLoss();
     }
 
     @Override

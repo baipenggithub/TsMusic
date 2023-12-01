@@ -19,7 +19,6 @@ import com.ts.music.base.BaseFragment;
 import com.ts.music.databinding.FragmentPlaylistBinding;
 import com.ts.music.entity.RadioBean;
 import com.ts.music.ui.adapter.RadioCurrentlyListAdapter;
-import com.ts.music.ui.adapter.RadioListAdapter;
 import com.ts.music.ui.viewmodel.PlayListViewModel;
 
 import java.util.ArrayList;

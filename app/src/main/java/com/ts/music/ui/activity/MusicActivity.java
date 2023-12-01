@@ -1,7 +1,6 @@
 package com.ts.music.ui.activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,18 +8,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.RadioGroup;
-
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-
 import com.ts.music.R;
 import com.ts.music.constants.MusicConstants;
 import com.ts.music.databinding.ActivityMainBinding;
@@ -36,36 +31,26 @@ import com.ts.music.utils.LogUtils;
  */
 
 public class MusicActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
-
     private static final String TAG = "MusicActivity";
     private static final String INTENT_KEY = "module";
     private static final String INTENT_BT_VALUE = "bt";
     private static final String INTENT_USB_VALUE = "usb";
-    private static final String INTENT_RADIO_VALUE = "online";
+    private static final String INTENT_RADIO_VALUE = "radio";
     private static final String INTENT_SAVE_VALUE = "module";
     private static final int SWITCH_FRAGMENT = 0;
-
+    private int mFragmentType = -1;
+    private boolean mIsInit = false;
+    private ActivityMainBinding mBinding;
+    private MusicActivityViewModel mViewModel;
+    private FragmentManager mFragmentManager;
     private UsbMusicFragment mUsbPlayerFragment;
     private BtMusicFragment mBtMusicMainFragment;
     private RadioFragment mRadioFragment;
-    private FragmentManager mFragmentManager;
-
-    private ActivityMainBinding mBinding;
-    private MusicActivityViewModel mViewModel;
-    private int mFragmentType = -1;
-    private boolean mIsInit = false;
-
-    private final Handler mHandler = new Handler(msg -> {
-        LogUtils.logD(TAG, "position : " + msg.arg1);
-        switchFragment(msg.arg1);
-        return false;
-    });
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LogUtils.logD(TAG, "onCreate :: invoke");
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
         getWindow().setStatusBarColor(Color.TRANSPARENT);
         if (null != savedInstanceState) {
             mFragmentType = savedInstanceState.getInt(INTENT_SAVE_VALUE);
@@ -78,6 +63,11 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mBinding.topTabBar.setOnCheckedChangeListener(this);
         initLayout();
     }
+    private final Handler mHandler = new Handler(msg -> {
+        LogUtils.logD(TAG, "position : " + msg.arg1);
+        switchFragment(msg.arg1);
+        return false;
+    });
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -91,16 +81,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mIsInit = false;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mHandler.removeMessages(SWITCH_FRAGMENT);
-    }
-
-    /**
-     * initLayout.
-     */
-    public void initLayout() {
+    private void initLayout(){
         mIsInit = true;
         Intent intent = getIntent();
         chooseFragment(intent, true);
@@ -139,7 +120,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
                     selectRadioBt(mFragmentType);
                 } else {
                     if (mBinding.rbRadio.isChecked()) {
-//                        startOnlineMusic();
+                        selectRadioBt(MusicConstants.RADIO_MUSIC);
                     } else {
                         selectRadioBt(MusicConstants.BT_MUSIC);
                     }
@@ -156,19 +137,19 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
                 .getDrawable(R.drawable.bg_selector_rb) : getResources()
                 .getDrawable(R.color.color_transparent));
         mBinding.rbBtMusic.setTextColor(btMusic ? getResources()
-                .getColor(R.color.music_toast_color) : getResources()
+                .getColor(R.color.color_primary) : getResources()
                 .getColor(R.color.bg_rb_tv_color));
         mBinding.rbRadio.setBackground(onLineMusic ? getResources()
                 .getDrawable(R.drawable.bg_selector_rb) : getResources()
                 .getDrawable(R.color.color_transparent));
         mBinding.rbRadio.setTextColor(onLineMusic ? getResources()
-                .getColor(R.color.music_toast_color) : getResources()
+                .getColor(R.color.color_primary) : getResources()
                 .getColor(R.color.bg_rb_tv_color));
         mBinding.rbUsbMusic.setBackground(usbMusic ? getResources()
                 .getDrawable(R.drawable.bg_selector_rb) : getResources()
                 .getDrawable(R.color.color_transparent));
         mBinding.rbUsbMusic.setTextColor(usbMusic ? getResources()
-                .getColor(R.color.music_toast_color) : getResources()
+                .getColor(R.color.color_primary) : getResources()
                 .getColor(R.color.bg_rb_tv_color));
         mBinding.rbRadio.setCompoundDrawablesWithIntrinsicBounds(getDrawable(R.drawable.selector_radio)
                 , null, onLineMusic ? getResources()
@@ -186,7 +167,6 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         LogUtils.logD(TAG, "switchFragment :: invoke :: position :: " + position);
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
         hindFragment(transaction);
-        mViewModel.updateCurrentTab(position);
         mFragmentType = position;
         Intent intent = getIntent();
         switch (position) {
@@ -245,7 +225,6 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
                 break;
             case MusicConstants.RADIO_MUSIC:
                 mBinding.topTabBar.check(R.id.rbRadio);
-//                startOnlineMusic();
                 break;
             case MusicConstants.USB_MUSIC:
                 mBinding.topTabBar.check(R.id.rbUsbMusic);
@@ -267,7 +246,6 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
             transaction.hide(mRadioFragment);
         }
     }
-
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
@@ -276,9 +254,8 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
     }
 
     @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        LogUtils.logD(TAG, "onCheckedChanged checkedId : " + checkedId);
-        switch (checkedId) {
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (i) {
             case R.id.rbBtMusic:
                 sendMessage(MusicConstants.BT_MUSIC);
                 break;
@@ -302,9 +279,9 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mHandler.sendMessage(message);
     }
 
-//    private void startOnlineMusic() {
-//        CommonUtils.startApp(MusicConstants.ONLINE_MUSIC_PACKAGE_NAME,
-//                MusicConstants.ONLINE_MUSIC_MAIN_ACTIVITY, null, this);
-//    }
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mHandler.removeMessages(SWITCH_FRAGMENT);
+    }
 }

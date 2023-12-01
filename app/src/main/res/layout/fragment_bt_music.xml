@@ -1,260 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/bt_music_fragment"-->
-<!--        style="@style/MatchMatch.Vertical"-->
-<!--        android:descendantFocusability="blocksDescendants">-->
-
-<!--        <include-->
-<!--            android:id="@+id/fragment_bt_player"-->
-<!--            layout="@layout/fragment_bt_player"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/fragment_usb_music_top_height"-->
-<!--            app:viewModel="@{viewModel}" />-->
-
-<!--        &lt;!&ndash;aa connection&ndash;&gt;-->
-<!--        <ImageView-->
-<!--            android:id="@+id/aa"-->
-<!--            android:layout_width="@dimen/fragment_aa_iv_width"-->
-<!--            android:layout_height="@dimen/fragment_aa_iv_width"-->
-<!--            android:layout_marginTop="@dimen/fragment_aa_iv_top"-->
-<!--            android:src="@drawable/aa_connection_img"-->
-<!--            android:visibility="gone"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/fragment_bt_player"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/aa_tv"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="@dimen/fragment_exception_tv_height"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/fragment_aa_bt_tv_top"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/aa_connect_tv"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/fragment_exception_tv_size"-->
-<!--            android:visibility="@{viewModel.AAConnectionState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/aa"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        &lt;!&ndash;bluetooth connection&ndash;&gt;-->
-<!--        <ImageView-->
-<!--            android:id="@+id/bt"-->
-<!--            android:layout_width="@dimen/fragment_bt_exception_bt_iv_side"-->
-<!--            android:layout_height="@dimen/fragment_bt_exception_bt_iv_side"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/fragment_bt_exception_bt_iv_top"-->
-<!--            android:src="@drawable/bluetooth"-->
-<!--            android:visibility="@{viewModel.btConnectShowState ? View.GONE : View.VISIBLE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/fragment_bt_player"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/bt_tv"-->
-<!--            android:layout_width="@dimen/fragment_exception_tv_width"-->
-<!--            android:layout_height="@dimen/fragment_exception_tv_height"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/fragment_bt_exception_bt_tv_top"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/connect_bt_tv"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/fragment_exception_tv_size"-->
-<!--            android:visibility="@{viewModel.btConnectShowState ? View.GONE : View.VISIBLE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/bt"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/bt_connect_btn"-->
-<!--            onClickCommand="@{viewModel.btConnect}"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="@dimen/fragment_bt_exception_bt_bt_height"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/fragment_bt_exception_bt_bt_top"-->
-<!--            android:background="@drawable/exception_button_selector"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingStart="@dimen/fragment_bt_exception_bt_bt_padding"-->
-<!--            android:paddingEnd="@dimen/fragment_bt_exception_bt_bt_padding"-->
-<!--            android:text="@string/connect_bt"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/fragment_bt_exception_bt_bt_size"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:visibility="@{viewModel.btConnectShowState ? View.GONE : View.VISIBLE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/bt_tv"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        &lt;!&ndash;a2dp connection&ndash;&gt;-->
-<!--        <ImageView-->
-<!--            android:id="@+id/a2dp"-->
-<!--            android:layout_width="@dimen/fragment_bt_exception_bt_iv_side"-->
-<!--            android:layout_height="@dimen/fragment_bt_exception_bt_iv_side"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/fragment_bt_exception_bt_iv_top"-->
-<!--            android:src="@drawable/bluetooth"-->
-<!--            android:visibility="@{viewModel.a2dpConnectedState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/fragment_bt_player"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/a2dp_hint_check"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/a2dp_exception_tv_top_margin"-->
-<!--            android:gravity="center"-->
-<!--            android:text="@string/bt_check_settings_tv"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/fragment_exception_tv_size"-->
-<!--            android:visibility="@{viewModel.a2dpConnectedState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/a2dp"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/a2dp_hint_open"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="@string/bt_open_a2dp_permission_tv"-->
-<!--            android:textColor="@color/a2dp_prompt_tv_alpha"-->
-<!--            android:textSize="@dimen/a2dp_prompt_tv_size"-->
-<!--            android:visibility="@{viewModel.a2dpConnectedState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/a2dp_hint_check"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/a2dp_hint_device_name"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:text="@{viewModel.bluetoothDeviceName}"-->
-<!--            android:textColor="@color/a2dp_prompt_tv_alpha"-->
-<!--            android:textSize="@dimen/a2dp_prompt_tv_size"-->
-<!--            android:visibility="@{viewModel.a2dpConnectedState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/a2dp_hint_open"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/bt_permission_btn"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="@dimen/fragment_bt_exception_bt_bt_height"-->
-<!--            android:layout_gravity="center_horizontal"-->
-<!--            android:layout_marginTop="@dimen/btn_open_a2dp_top_mergin"-->
-<!--            android:background="@drawable/open_a2dp_perm_bg"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingStart="@dimen/fragment_bt_exception_bt_bt_padding"-->
-<!--            android:paddingEnd="@dimen/fragment_bt_exception_bt_bt_padding"-->
-<!--            android:text="@string/open_bt_a2dp_permission_tv"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textSize="@dimen/fragment_bt_exception_bt_bt_size"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:visibility="@{viewModel.a2dpConnectedState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/a2dp_hint_device_name"-->
-<!--            tools:ignore="MissingConstraints" />-->
-
-<!--        <LinearLayout-->
-<!--            android:id="@+id/song_list_shrink_btn"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/song_list_shrink_btn_height"-->
-<!--            android:visibility="gone"-->
-<!--            android:background="@color/list_shrink_bg"-->
-<!--            android:alpha="@integer/opacity"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:gravity="center"-->
-<!--            app:layout_constraintTop_toTopOf="@id/bt_music_fragment">-->
-
-<!--            <ImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:src="@drawable/song_list_shrink_btn"/>-->
-<!--        </LinearLayout>-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/song_list_bg"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:layout_marginTop="@dimen/song_list_shrink_btn_height"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            android:visibility="gone"-->
-<!--            android:background="@color/color_primary"-->
-<!--            android:alpha="@integer/opacity" />-->
-
-<!--        &lt;!&ndash;play music&ndash;&gt;-->
-<!--        <include-->
-<!--            android:id="@+id/fragment_song_list"-->
-<!--            layout="@layout/bt_song_list"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/recyclerview_no_height"-->
-<!--            android:visibility="@{viewModel.sheetShowState ? View.VISIBLE : View.GONE}"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/fragment_bt_player"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:viewModel="@{viewModel}" />-->
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="148dp"
-            android:layout_height="187dp"
-            android:layout_marginLeft="453dp"
-            android:layout_marginTop="337dp"
-            android:background="@drawable/bg_not_bluetooth"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bt_frameLayout"/>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="325dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="365dp"
-            android:layout_marginTop="39dp"
-            android:gravity="center"
-            android:text="Bluetooth is not connected!"
-            android:textColor="#FF6F74E5"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/bt_constraintLayout">
+            <LinearLayout
+                android:layout_width="148dp"
+                android:layout_height="187dp"
+                android:layout_marginLeft="453dp"
+                android:layout_marginTop="337dp"
+                android:id="@+id/bg_linearLayout"
+                android:background="@drawable/bg_not_bluetooth"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="45dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/icon_no_bluetooth"
+                    android:layout_marginBottom="88dp"
+                    android:layout_marginTop="34dp"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="40dp"/>
+            </LinearLayout>
 
-        <Button
-            android:layout_width="292dp"
-            android:layout_height="60dp"
-            android:background="@drawable/bg_btn"
-            android:text="Sure"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="28sp"
-            android:layout_marginTop="100dp"
-            android:layout_marginLeft="381dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="325dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="365dp"
+                android:layout_marginTop="39dp"
+                android:gravity="center"
+                android:text="Bluetooth is not connected!"
+                android:textColor="#FF6F74E5"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bg_linearLayout" />
+
+            <Button
+                android:layout_width="292dp"
+                android:layout_height="60dp"
+                android:id="@+id/suer_btn"
+                android:background="@drawable/bg_btn"
+                android:text="Sure"
+                android:textAllCaps="false"
+                android:textColor="#fff"
+                android:textSize="28sp"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="381dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
     <data>
-
         <import type="android.view.View" />
 
         <variable

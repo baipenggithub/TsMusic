@@ -3,6 +3,7 @@ package com.ts.music.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,7 +15,7 @@ import com.ts.music.entity.RadioBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RadioCurrentlyListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class USBFolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final List<RadioBean> mRadioBeanList = new ArrayList<>();
     private static final String TAG = "RadioListAdapter";
     private int selectedItem = -1;
@@ -30,9 +31,8 @@ public class RadioCurrentlyListAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = null;
-        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_currently_radio_list, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usb_list, parent, false);
         return new RadioViewHolder(view);
-
     }
 
     @Override
@@ -40,7 +40,7 @@ public class RadioCurrentlyListAdapter extends RecyclerView.Adapter<RecyclerView
         ((RadioViewHolder) holder).bind(mRadioBeanList.get(position));
         holder.itemView.setSelected(selectedItem == position);
 //        Log.e(TAG, "onBindViewHolder: "+(selectedItem == position));
-        ((RadioViewHolder) holder).radioListItem.setOnClickListener(new View.OnClickListener() {
+        ((RadioViewHolder) holder).radio_list_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 notifyItemChanged(selectedItem); // 取消上一次选中项的背景
@@ -61,19 +61,26 @@ public class RadioCurrentlyListAdapter extends RecyclerView.Adapter<RecyclerView
     }
 
     public static class RadioViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName , tvNum;
-        private ConstraintLayout radioListItem;
+        private TextView tvName , tvNum ,tv_title, tv_time;
+        private ImageView imageView;
+        private ConstraintLayout radio_list_item;
 
         public RadioViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tv_num);
+            tvName = itemView.findViewById(R.id.tv_name);
             tvNum = itemView.findViewById(R.id.tv_num);
-            radioListItem = itemView.findViewById(R.id.radio_list_item);
+            tv_title = itemView.findViewById(R.id.tv_title);
+            imageView = itemView.findViewById(R.id.imageView);
+            tv_time = itemView.findViewById(R.id.tv_time);
+            radio_list_item = itemView.findViewById(R.id.radio_list_item);
         }
 
         public void bind(RadioBean radioBean) {
-            tvName.setText(radioBean.getName());
+            tv_title.setText(radioBean.getTitle());
             tvNum.setText(radioBean.getNum());
+            tvName.setVisibility(View.GONE);
+            imageView.setImageResource(radioBean.getIcon());
+            tv_time.setText(radioBean.getTime());
         }
     }
 }
