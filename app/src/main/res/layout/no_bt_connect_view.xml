@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bt_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/bg_linearLayout"
+            android:layout_width="148dp"
+            android:layout_height="187dp"
+            android:layout_marginStart="453dp"
+            android:layout_marginTop="337dp"
+            android:background="@drawable/bg_not_bluetooth"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="45dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="88dp"
+                android:src="@drawable/icon_no_bluetooth" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="365dp"
+            android:layout_marginTop="39dp"
+            android:gravity="center"
+            android:text="Bluetooth is not connected!"
+            android:textColor="#FF6F74E5"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bg_linearLayout" />
+
+        <Button
+            onClickCommand="@{viewModel.btConnect}"
+            android:id="@+id/suer_btn"
+            android:layout_width="292dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="381dp"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/bg_btn"
+            android:text="Sure"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="28sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.ts.music.ui.viewmodel.BtMusicViewModel" />
+    </data>
+</layout>

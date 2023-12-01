@@ -95,10 +95,6 @@ public class CommonUtils {
      */
     @SuppressLint("MissingPermission")
     public static BluetoothDevice getConnectedDevice() {
-//        if (ActivityCompat.checkSelfPermission(BaseApplication.getApplication(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-//            LogUtils.logD("CommonUtils", "No BLUETOOTH_CONNECT permission");
-//            return null;
-//        }
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : bondedDevices) {
             LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());
@@ -116,10 +112,6 @@ public class CommonUtils {
      */
     @SuppressLint("MissingPermission")
     public static boolean isExistConnectDevices() {
-//        if (ActivityCompat.checkSelfPermission(BaseApplication.getApplication(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-//            LogUtils.logD("CommonUtils", "No BLUETOOTH_CONNECT permission");
-//            return false;
-//        }
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : bondedDevices) {
             LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());

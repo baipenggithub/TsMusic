@@ -21,13 +21,11 @@
 
     <!--Player time progress bar style-->
     <style name="MusicSeekBarStyle">
-        <item name="android:layout_width">@dimen/player_seek_bar_width</item>
-        <item name="android:layout_height">@dimen/player_seek_bar_height</item>
+        <item name="android:layout_width">1223dp</item>
+        <item name="android:layout_height">4dp</item>
         <item name="android:background">@null</item>
-        <item name="android:maxHeight">@dimen/seek_bar_style_max_height</item>
-        <item name="android:minHeight">@dimen/seek_bar_style_min_height</item>
         <item name="android:progressDrawable">@drawable/music_bottom_seek_progress</item>
-        <item name="android:thumb">@drawable/music_bottom_seek_thumb</item>
+        <item name="android:thumb">@null</item>
         <item name="android:splitTrack">false</item>
     </style>
 

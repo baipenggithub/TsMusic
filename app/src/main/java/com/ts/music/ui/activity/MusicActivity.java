@@ -3,12 +3,16 @@ package com.ts.music.ui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.RadioGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,10 +20,12 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
+
 import com.ts.music.R;
 import com.ts.music.constants.MusicConstants;
 import com.ts.music.databinding.ActivityMainBinding;
 import com.ts.music.ui.fragment.BtMusicFragment;
+import com.ts.music.ui.fragment.BtMusicFragmentCopy;
 import com.ts.music.ui.fragment.RadioFragment;
 import com.ts.music.ui.fragment.UsbMusicFragment;
 import com.ts.music.ui.viewmodel.MusicActivityViewModel;
@@ -44,14 +50,17 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
     private MusicActivityViewModel mViewModel;
     private FragmentManager mFragmentManager;
     private UsbMusicFragment mUsbPlayerFragment;
-    private BtMusicFragment mBtMusicMainFragment;
+    private BtMusicFragmentCopy mBtMusicMainFragment;
     private RadioFragment mRadioFragment;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        getWindow().setStatusBarColor(Color.TRANSPARENT);
+        setStatusBar(this);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         if (null != savedInstanceState) {
             mFragmentType = savedInstanceState.getInt(INTENT_SAVE_VALUE);
             LogUtils.logD(TAG, "onCreate :: type" + mFragmentType);
@@ -63,6 +72,25 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mBinding.topTabBar.setOnCheckedChangeListener(this);
         initLayout();
     }
+
+    /**
+     * 沉浸式状态栏.
+     * @param activity activity
+     */
+    @SuppressLint("NewApi")
+    public static void setStatusBar(AppCompatActivity activity) {
+        Window window = activity.getWindow();
+        View decorView = window.getDecorView();
+        //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        decorView.setSystemUiVisibility(option);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(Color.TRANSPARENT);
+        window.setNavigationBarColor(Color.TRANSPARENT);
+        window.setNavigationBarContrastEnforced(false);
+    }
+
     private final Handler mHandler = new Handler(msg -> {
         LogUtils.logD(TAG, "position : " + msg.arg1);
         switchFragment(msg.arg1);
@@ -81,7 +109,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mIsInit = false;
     }
 
-    private void initLayout(){
+    private void initLayout() {
         mIsInit = true;
         Intent intent = getIntent();
         chooseFragment(intent, true);
@@ -175,7 +203,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
                 setTabBarBac(true, false, false);
                 if (null == mBtMusicMainFragment) {
                     LogUtils.logD(TAG, "switchFragment :: mBtMusicMainFragment");
-                    mBtMusicMainFragment = BtMusicFragment.newInstance();
+                    mBtMusicMainFragment = BtMusicFragmentCopy.newInstance();
                     transaction.add(R.id.content_frame_layout, mBtMusicMainFragment);
                 } else {
                     transaction.show(mBtMusicMainFragment);
@@ -246,6 +274,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
             transaction.hide(mRadioFragment);
         }
     }
+
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {

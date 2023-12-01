@@ -10,7 +10,7 @@
     <item android:id="@android:id/secondaryProgress">
         <clip>
             <shape>
-                <solid android:color="@color/music_bottom_seek_secondary_progress" />
+                <solid android:color="#6F74E5" />
                 <size android:height="@dimen/music_bottom_seek_height" />
                 <corners android:radius="@dimen/music_bottom_seek_radius" />
             </shape>
@@ -21,8 +21,8 @@
             <shape android:shape="rectangle">
                 <gradient
                     android:angle="180"
-                    android:endColor="@color/music_bottom_seek_progress_end"
-                    android:startColor="@color/music_bottom_seek_progress_start"
+                    android:endColor="#DBE8FF"
+                    android:startColor="#DBE8FF"
                     android:type="linear"
                     android:useLevel="true" />
                 <corners android:radius="@dimen/music_bottom_seek_progress_radius" />

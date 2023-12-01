@@ -2,39 +2,29 @@ package com.ts.music.ui.fragment;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.ts.music.BR;
 import com.ts.music.R;
 import com.ts.music.base.BaseFragment;
-import com.ts.music.constants.MusicConstants;
-import com.ts.music.databinding.FragmentBtMusicBinding;
+import com.ts.music.databinding.FragmentBtMusicCopyBinding;
 import com.ts.music.ui.adapter.BtSongListAdapter;
 import com.ts.music.ui.viewmodel.BtMusicViewModel;
 import com.ts.music.utils.ConstraintUtil;
 import com.ts.music.utils.LogUtils;
-import com.ts.music.utils.MusicUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 /**
  * BtMusic Fragment.
  */
-public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusicViewModel>
+public class BtMusicFragment extends BaseFragment<FragmentBtMusicCopyBinding, BtMusicViewModel>
         implements BtMusicViewModel.OnMusicPlayStateListener {
     private static final String TAG = BtMusicFragment.class.getSimpleName();
     private BtSongListAdapter mBtSongListAdapter;
@@ -46,7 +36,6 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
     private Fragment currentFragment;
     private FragmentTransaction ft;
     private List<Fragment> fragmentList;
-    private NotBtFragment notBtFragment;
 
     /**
      * Use this factory method to create a new instance of
@@ -61,7 +50,7 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container,
                                @Nullable Bundle savedInstanceState) {
-        return R.layout.fragment_bt_music;
+        return R.layout.fragment_bt_music_copy;
     }
 
     @Override
@@ -75,16 +64,16 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
 //            }
 //        });
 //        initRecyclerView();
-        notBtFragment = NotBtFragment.newInstance();
-        fragmentList = new ArrayList<>();
-        fragmentList.add(0,notBtFragment);
-        mBinding.suerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mBinding.btConstraintLayout.setVisibility(View.GONE);
-                switchFragment(0);
-            }
-        });
+//        notBtFragment = NotBtFragment.newInstance();
+//        fragmentList = new ArrayList<>();
+//        fragmentList.add(0,notBtFragment);
+//        mBinding.suerBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                mBinding.btConstraintLayout.setVisibility(View.GONE);
+//                switchFragment(0);
+//            }
+//        });
     }
 
     private void  switchFragment(Integer index) {
@@ -103,11 +92,11 @@ public class BtMusicFragment extends BaseFragment<FragmentBtMusicBinding, BtMusi
         }
         currentFragment = fragment;
         //判断此Fragment是否已经添加到FragmentTransaction事物中
-        if (!fragment.isAdded() && TextUtils.isEmpty(fragment.getTag())) {
-            ft.add(R.id.bt_frameLayout, fragment, fragment.getClass().getName());
-        } else {
-            ft.show(fragment);
-        }
+//        if (!fragment.isAdded() && TextUtils.isEmpty(fragment.getTag())) {
+//            ft.add(R.id.bt_frameLayout, fragment, fragment.getClass().getName());
+//        } else {
+//            ft.show(fragment);
+//        }
         ft.commitAllowingStateLoss();
     }
 

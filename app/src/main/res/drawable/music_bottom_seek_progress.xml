@@ -2,17 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape>
-            <solid android:color="@color/music_bottom_seek_bg" />
-            <size android:height="@dimen/music_bottom_seek_height" />
-            <corners android:radius="@dimen/music_bottom_seek_radius" />
+            <solid android:color="#DBE8FF" />
+            <size android:height="5dp" />
+            <corners android:radius="2dp" />
         </shape>
     </item>
     <item android:id="@android:id/secondaryProgress">
         <clip>
             <shape>
-                <solid android:color="@color/music_bottom_seek_secondary_progress" />
-                <size android:height="@dimen/music_bottom_seek_height" />
-                <corners android:radius="@dimen/music_bottom_seek_radius" />
+                <solid android:color="#E2EAF7" />
+                <size android:height="5dp" />
+                <corners android:radius="2dp" />
             </shape>
         </clip>
     </item>
@@ -21,11 +21,11 @@
             <shape android:shape="rectangle">
                 <gradient
                     android:angle="180"
-                    android:endColor="@color/music_bottom_seek_progress_end"
-                    android:startColor="@color/music_bottom_seek_progress_start"
+                    android:endColor="#6F74E5"
+                    android:startColor="#6F74E5"
                     android:type="linear"
                     android:useLevel="true" />
-                <corners android:radius="@dimen/music_bottom_seek_progress_radius" />
+                <corners android:radius="1dp" />
             </shape>
         </clip>
     </item>

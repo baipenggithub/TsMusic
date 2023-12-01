@@ -70,23 +70,24 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     private OnMusicPlayStateListener mListener;
 
     private int mAudioPlayTime = TIME_ERROR_CODE;
-    private MutableLiveData<String> mAudioName = new MutableLiveData<>();
-    private MutableLiveData<String> mNickName = new MutableLiveData<>();
-    private MutableLiveData<String> mTotalTime = new MutableLiveData<>();
-    private MutableLiveData<String> mCurrentTime = new MutableLiveData<>();
-    private MutableLiveData<Integer> mTextColor = new MutableLiveData<>();
-    private MutableLiveData<Integer> mSeekBarProgress = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsPlay = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsValidAudioName = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mSheetShowState = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mListHasData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mBtConnectShowState = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mAAConnectState = new MutableLiveData<>();
-    private MutableLiveData<Drawable> mPlayModeDrawable = new MutableLiveData<>();
-    private MutableLiveData<String> mSumSongs = new MutableLiveData<>();
-    private MutableLiveData<String> mDeviceName = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsA2dpConnected = new MutableLiveData<>();
-    private MutableLiveData<Drawable> mAlbumCoverDrawable = new MutableLiveData<>();
+    private final MutableLiveData<String> mAudioName = new MutableLiveData<>();
+    private final MutableLiveData<String> mNickName = new MutableLiveData<>();
+    private final MutableLiveData<String> mAlbumName = new MutableLiveData<>();
+    private final MutableLiveData<String> mTotalTime = new MutableLiveData<>();
+    private final MutableLiveData<String> mCurrentTime = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mTextColor = new MutableLiveData<>();
+    private final MutableLiveData<Integer> mSeekBarProgress = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsPlay = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsValidAudioName = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mSheetShowState = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mListHasData = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mBtConnectShowState = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mAAConnectState = new MutableLiveData<>();
+    private final MutableLiveData<Drawable> mPlayModeDrawable = new MutableLiveData<>();
+    private final MutableLiveData<String> mSumSongs = new MutableLiveData<>();
+    private final MutableLiveData<String> mDeviceName = new MutableLiveData<>();
+    private final MutableLiveData<Boolean> mIsA2dpConnected = new MutableLiveData<>();
+    private final MutableLiveData<Drawable> mAlbumCoverDrawable = new MutableLiveData<>();
     public SingleLiveEvent<List<AudioInfoBean>> mAudioData = new SingleLiveEvent<>();
 
     private boolean mCurrentPlayState = false;
@@ -147,8 +148,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
 
         if (mCurrentPlayList != null) {
             mAudioData.postValue(mCurrentPlayList);
-            mSumSongs.postValue(String.format(mContext.getString(R.string.sum_song),
-                    mCurrentPlayList.size()));
+            mSumSongs.postValue(String.format(mContext.getString(R.string.sum_song), mCurrentPlayList.size()));
         }
 
         updateA2dpState();
@@ -160,11 +160,12 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         if (mCurrentAudioInfo == null || !isA2dpConnected) {
             setAudioName(mContext.getResources().getString(R.string.audio_name_default));
             setNickName(MusicConstants.BT_MUSIC_EMPTY_NICKNAME);
+            setAlbumName("");
             setCurrentTime(mContext.getResources().getString(R.string.player_time_default));
             setTotalTime(mContext.getResources().getString(R.string.player_time_default));
             setmTextColor(mContext.getColor(R.color.light_grey));
             setAudioCoverDrawable(mContext.getDrawable(R.drawable.no_music));
-        } else if (mCurrentAudioInfo != null) {
+        } else {
             LogUtils.logD(TAG, "artist name : " + mCurrentAudioInfo.getAudioArtistName()
                     + " audio name : " + mCurrentAudioInfo.getAudioName());
             mAudioPlayTime = Integer.parseInt(mCurrentAudioInfo.getAudioPlayTime());
@@ -175,12 +176,13 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             setAudioName(showAudioName);
 
             String artistName = mCurrentAudioInfo.getAudioArtistName();
-            String showArtistName = (artistName == null || Objects.equals("", artistName))
-                    ? mContext.getResources().getString(R.string.nick_name_default) : artistName;
+            String showArtistName = (artistName == null || Objects.equals("", artistName)) ? mContext.getResources().getString(R.string.nick_name_default) : artistName;
             setNickName(showArtistName);
+            String albumName = mCurrentAudioInfo.getAudioAlbumName();
+            String showAlbumName = (albumName == null || Objects.equals("", albumName)) ? mContext.getResources().getString(R.string.nick_name_default) : albumName;
+            setAlbumName(showAlbumName);
 
-            setmTextColor(mContext.getColor((audioName == null
-                    || Objects.equals("", audioName)) ? R.color.light_grey : R.color.white));
+            setmTextColor(mContext.getColor((audioName == null || Objects.equals("", audioName)) ? R.color.light_grey : R.color.white));
 
             long progress = mCurrentAudioInfo.getLastPlayTime();
             setCurrentTime(timeFormatConversion(progress));
@@ -191,8 +193,6 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
                 mListener.onMusicPlayStateChanged(getIndexFromPlayList(mCurrentAudioInfo),
                         mCurrentPlayState, showArtistName);
             }
-        } else {
-            // empty.
         }
     }
 
@@ -238,7 +238,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             mBtListener = new IMediaServiceListener() {
                 @Override
                 public void onServiceConnected(BaseManager baseManager) {
-                    LogUtils.logD(TAG, "onServiceConnected::" + baseManager);
+                    LogUtils.logD(TAG, "onServiceConnected====>" + baseManager);
                     mBtMusicManager = (BtMusicManager) baseManager;
                     if (mBtMusicManager == null) {
                         return;
@@ -253,11 +253,11 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
 
                 @Override
                 public void onServiceDisconnected() {
-                    LogUtils.logD(TAG, "onServiceDisconnected");
+                    LogUtils.logD(TAG, "====onServiceDisconnected====");
                 }
 
             };
-            BtMusicManager.getInstance(mContext, mBtListener);
+            BtMusicManager.getInstance(BaseApplication.getApplication(), mBtListener);
         } catch (IllegalStateException exception) {
             exception.printStackTrace();
             LogUtils.logD(TAG, "onServiceDisconnected::" + exception.toString());
@@ -266,8 +266,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
 
     // Play the previous song
     public BindingCommand playerLastMusic = new BindingCommand(() -> {
-        if (mBtMusicManager == null || !checkBluetoothStatus()
-                || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
+        if (mBtMusicManager == null || !checkBluetoothStatus() || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
             LogUtils.logD(TAG, "Not clickable");
             return;
         }
@@ -282,14 +281,11 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     });
 
     // Start pause
-    public BindingCommand playerPlayOrPause = new BindingCommand(() -> {
-        playOrPause();
-    });
+    public BindingCommand playerPlayOrPause = new BindingCommand(this::playOrPause);
 
     private void playOrPause() {
         LogUtils.logD(TAG, "playOrPause");
-        if (mBtMusicManager == null || !checkBluetoothStatus()
-                || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
+        if (mBtMusicManager == null || !checkBluetoothStatus() || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
             LogUtils.logD(TAG, "Not clickable");
             return;
         }
@@ -319,8 +315,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     // Play next
     public BindingCommand playerNext = new BindingCommand(() -> {
         LogUtils.logD(TAG, "Play next");
-        if (mBtMusicManager == null || !checkBluetoothStatus()
-                || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
+        if (mBtMusicManager == null || !checkBluetoothStatus() || !mMusicClickControl.isCanTrigger() || dataIsEmpty()) {
             LogUtils.logD(TAG, "Not clickable");
             return;
         }
@@ -557,10 +552,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             LogUtils.logD(TAG, "data is null");
             return true;
         }
-        return getAudioName().getValue().equals(
-                mContext.getResources().getString(R.string.audio_name_default))
-                || getNickName().equals(
-                mContext.getResources().getString(R.string.nick_name_default));
+        return getAudioName().getValue().equals(mContext.getResources().getString(R.string.audio_name_default)) || getNickName().equals(mContext.getResources().getString(R.string.nick_name_default));
     }
 
     @Override
@@ -620,6 +612,14 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     // Get nick name.
     public MutableLiveData<String> getNickName() {
         return mNickName;
+    }
+
+    public MutableLiveData<String>getAlbumName(){
+        return mAlbumName;
+    }
+
+    public void setAlbumName(String albumName){
+        mAlbumName.postValue(albumName);
     }
 
     // Set nick name.
@@ -768,15 +768,10 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     @SuppressLint("MissingPermission")
     public void setBluetoothDeviceName(BluetoothDevice connectedDevice) {
         String deviceName = null;
-//        if (ActivityCompat.checkSelfPermission(BaseApplication.getApplication(), Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-//         LogUtils.logD(TAG,"No BLUETOOTH_CONNECT permission==");
-//            return;
-//        }
         if (connectedDevice != null && !connectedDevice.getName().isEmpty()) {
-            deviceName = mContext.getString(R.string.bt_device_name) + connectedDevice.getName();
+            deviceName = connectedDevice.getName();
         } else {
-            deviceName = mContext.getString(R.string.bt_device_name)
-                    + mContext.getString(R.string.default_bt_device_name);
+            deviceName = mContext.getString(R.string.default_bt_device_name);
         }
         mDeviceName.postValue(deviceName);
     }
@@ -801,14 +796,13 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         return mListHasData;
     }
 
-    private BroadcastReceiver mBtStateReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mBtStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_CONNECTION_STATE,
-                    BluetoothAdapter.STATE_DISCONNECTED);
+            int state = intent.getIntExtra(BluetoothAdapter.EXTRA_CONNECTION_STATE, BluetoothAdapter.STATE_DISCONNECTED);
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            if (state == BluetoothAdapter.STATE_CONNECTED
-                    || state == BluetoothAdapter.STATE_DISCONNECTED) {
+            LogUtils.logD(TAG, "state======" + state);
+            if (state == BluetoothAdapter.STATE_CONNECTED || state == BluetoothAdapter.STATE_DISCONNECTED) {
                 setBluetoothDeviceName(device);
                 updateA2dpState();
             }
