@@ -89,7 +89,6 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     private final MutableLiveData<Boolean> mIsA2dpConnected = new MutableLiveData<>();
     private final MutableLiveData<Drawable> mAlbumCoverDrawable = new MutableLiveData<>();
     public SingleLiveEvent<List<AudioInfoBean>> mAudioData = new SingleLiveEvent<>();
-
     private boolean mCurrentPlayState = false;
     private boolean mIsAAConnected = false;
     private List<AudioInfoBean> mCurrentPlayList = new ArrayList<>();
@@ -154,25 +153,20 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         updateA2dpState();
         setIsPlay(mCurrentPlayState);
         setListHasData(isExistPlayList);
-        LogUtils.logD(TAG, "mCurrentAudioInfo:" + mCurrentAudioInfo + "/"
-                + "  isA2dpConnected:" + isA2dpConnected
-                + "  isAAConnected : " + mIsAAConnected);
+        LogUtils.logD(TAG, "mCurrentAudioInfo:" + mCurrentAudioInfo + "/" + "  isA2dpConnected:" + isA2dpConnected + "  isAAConnected : " + mIsAAConnected);
         if (mCurrentAudioInfo == null || !isA2dpConnected) {
             setAudioName(mContext.getResources().getString(R.string.audio_name_default));
-            setNickName(MusicConstants.BT_MUSIC_EMPTY_NICKNAME);
+            setNickName("");
             setAlbumName("");
             setCurrentTime(mContext.getResources().getString(R.string.player_time_default));
             setTotalTime(mContext.getResources().getString(R.string.player_time_default));
-            setmTextColor(mContext.getColor(R.color.light_grey));
-            setAudioCoverDrawable(mContext.getDrawable(R.drawable.no_music));
+            setAudioCoverDrawable(mContext.getDrawable(R.drawable.icon_songs_bg));
         } else {
-            LogUtils.logD(TAG, "artist name : " + mCurrentAudioInfo.getAudioArtistName()
-                    + " audio name : " + mCurrentAudioInfo.getAudioName());
+            LogUtils.logD(TAG, "artist name : " + mCurrentAudioInfo.getAudioArtistName() + " audio name : " + mCurrentAudioInfo.getAudioName());
             mAudioPlayTime = Integer.parseInt(mCurrentAudioInfo.getAudioPlayTime());
 
             String audioName = mCurrentAudioInfo.getAudioName();
-            String showAudioName = (audioName == null || Objects.equals("", audioName))
-                    ? mContext.getResources().getString(R.string.audio_name_default) : audioName;
+            String showAudioName = (audioName == null || Objects.equals("", audioName)) ? mContext.getResources().getString(R.string.audio_name_default) : audioName;
             setAudioName(showAudioName);
 
             String artistName = mCurrentAudioInfo.getAudioArtistName();
@@ -182,16 +176,13 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             String showAlbumName = (albumName == null || Objects.equals("", albumName)) ? mContext.getResources().getString(R.string.nick_name_default) : albumName;
             setAlbumName(showAlbumName);
 
-            setmTextColor(mContext.getColor((audioName == null || Objects.equals("", audioName)) ? R.color.light_grey : R.color.white));
-
             long progress = mCurrentAudioInfo.getLastPlayTime();
             setCurrentTime(timeFormatConversion(progress));
             setSeekBarProgress(progress);
             setTotalTime(timeFormatConversion(mAudioPlayTime));
             updateAudioCover(mCurrentAudioInfo);
             if (null != mListener) {
-                mListener.onMusicPlayStateChanged(getIndexFromPlayList(mCurrentAudioInfo),
-                        mCurrentPlayState, showArtistName);
+                mListener.onMusicPlayStateChanged(getIndexFromPlayList(mCurrentAudioInfo), mCurrentPlayState, showArtistName);
             }
         }
     }
@@ -202,7 +193,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     private void updateAudioCover(AudioInfoBean audioInfoBean) {
         LogUtils.logD(TAG, "audioCoverUrl : " + audioInfoBean.getAudioCover());
         if (audioInfoBean.getAudioCover() == null) {
-            setAudioCoverDrawable(mContext.getDrawable(R.drawable.no_music));
+            setAudioCoverDrawable(mContext.getDrawable(R.drawable.icon_songs_bg));
         } else {
             setAudioCoverDrawable(getDrawable(audioInfoBean.getAudioCover()));
         }
@@ -217,7 +208,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             inputStream = new FileInputStream(url);
         } catch (FileNotFoundException fileNotFoundException) {
             LogUtils.logD(TAG, "audio cover file not found");
-            setAudioCoverDrawable(mContext.getDrawable(R.drawable.no_music));
+            setAudioCoverDrawable(mContext.getDrawable(R.drawable.icon_songs_bg));
             fileNotFoundException.printStackTrace();
         }
         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
@@ -445,17 +436,15 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
                     return;
                 }
                 LogUtils.logD(TAG, "initUi" + metadataItem.toString());
-                if (metadataItem.getAudioName() == null
-                        || metadataItem.getAudioArtistName() == null) {
+                if (metadataItem.getAudioName() == null || metadataItem.getAudioArtistName() == null) {
                     setAudioName(mContext.getResources().getString(R.string.audio_name_default));
                     setNickName(mContext.getResources().getString(R.string.nick_name_default));
-                    setmTextColor(mContext.getColor(R.color.light_grey));
+                    setAlbumName(mContext.getResources().getString(R.string.nick_name_default));
+                    // setmTextColor(mContext.getColor(R.color.light_grey));
                 } else {
                     setAudioName(metadataItem.getAudioName());
-                    setNickName(metadataItem.getAudioArtistName()
-                            + mContext.getResources().getString(R.string.music_subtitle_splicer)
-                            + metadataItem.getAudioAlbumName());
-                    setmTextColor(mContext.getColor(R.color.white));
+                    setNickName(metadataItem.getAudioArtistName());
+                    setAlbumName(metadataItem.getAudioAlbumName());
                 }
                 updateAudioCover(metadataItem);
             } catch (RemoteException exception) {
@@ -491,20 +480,13 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
             return;
         }
         if (!Objects.equals(mAudioName.getValue(), metadata.getAudioName())) {
-            setAudioName((metadata.getAudioName() == null || metadata.getAudioName().isEmpty())
-                    ? mResources.getString(R.string.audio_name_default) : metadata.getAudioName());
-            setmTextColor((metadata.getAudioName() == null)
-                    ? mResources.getColor(R.color.light_grey) : mResources.getColor(R.color.white));
+            setAudioName((metadata.getAudioName() == null || metadata.getAudioName().isEmpty()) ? mResources.getString(R.string.audio_name_default) : metadata.getAudioName());
         }
         LogUtils.logD(TAG, "Artist name : " + metadata.getAudioArtistName()
                 + "  Album name : " + metadata.getAudioAlbumName());
-        setNickName(((metadata.getAudioArtistName() == null)
-                || metadata.getAudioArtistName().equals(""))
-                ? mContext.getResources().getString(R.string.nick_name_default)
-                : (metadata.getAudioArtistName()
-                + mContext.getResources().getString(R.string.music_subtitle_splicer)
-                + metadata.getAudioAlbumName()));
+        setNickName(((metadata.getAudioArtistName() == null) || metadata.getAudioArtistName().equals("")) ? mContext.getResources().getString(R.string.nick_name_default) : (metadata.getAudioArtistName()));
         setTotalTime(timeFormatConversion(mAudioPlayTime));
+        setAlbumName(((metadata.getAudioAlbumName() == null) || metadata.getAudioAlbumName().equals("")) ? mContext.getResources().getString(R.string.nick_name_default) : (metadata.getAudioAlbumName()));
         if (null != mListener) {
             mListener.onMusicPlayStateChanged(getIndexFromPlayList(metadata),
                     mCurrentPlayState, getNickName().getValue());
@@ -571,9 +553,9 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     }
 
     //set text color
-    public void setmTextColor(Integer textColor) {
-        mTextColor.postValue(textColor);
-    }
+//    public void setmTextColor(Integer textColor) {
+//        mTextColor.postValue(textColor);
+//    }
 
     //get text color
     public MutableLiveData<Integer> getTextColor() {
@@ -614,11 +596,11 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         return mNickName;
     }
 
-    public MutableLiveData<String>getAlbumName(){
+    public MutableLiveData<String> getAlbumName() {
         return mAlbumName;
     }
 
-    public void setAlbumName(String albumName){
+    public void setAlbumName(String albumName) {
         mAlbumName.postValue(albumName);
     }
 

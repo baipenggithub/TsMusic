@@ -82,8 +82,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         Window window = activity.getWindow();
         View decorView = window.getDecorView();
         //两个 flag 要结合使用，表示让应用的主体内容占用系统状态栏的空间
-        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
         decorView.setSystemUiVisibility(option);
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.TRANSPARENT);

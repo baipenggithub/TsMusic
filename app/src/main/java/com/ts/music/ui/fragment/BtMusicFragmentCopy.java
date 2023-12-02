@@ -37,6 +37,11 @@ public class BtMusicFragmentCopy extends BaseFragment<FragmentBtMusicCopyBinding
     }
 
     @Override
+    public void initLayout() {
+        super.initLayout();
+    }
+
+    @Override
     public void initViewObservable() {
         super.initViewObservable();
         mViewModel.mAudioData.observe(this, audioInfoBeans -> {
@@ -50,13 +55,17 @@ public class BtMusicFragmentCopy extends BaseFragment<FragmentBtMusicCopyBinding
             }
         });
         mViewModel.getAudioCoverDrawable().observe(this, drawable -> {
+            if (null == getActivity()) {
+                return;
+            }
+           // mBinding.imageView2.setImageDrawable(drawable);
+            //mBinding.imageView10.setImageDrawable(drawable);
 
-            mBinding.imageView2.setCornerTopLeftRadius(10);
-            mBinding.imageView2.setCornerBottomLeftRadius(10);
-            mBinding.imageView2.setImageDrawable(drawable);
+           // mBinding.imageView2.setCornerTopLeftRadius(10);
+           // mBinding.imageView2.setCornerBottomLeftRadius(10);
 
-            mBinding.imageView10.isCircle(true);
-            mBinding.imageView10.setImageDrawable(drawable);
+           // mBinding.imageView10.isCircle(true);
+
         });
         //  mViewModel.setMusicPlayStateListener(this);
     }
