@@ -57,7 +57,7 @@
                     android:id="@+id/imageView10"
                     android:layout_width="262dp"
                     android:layout_height="262dp"
-                    android:src="@drawable/icon_songs_bg"
+                    android:src="@drawable/rotate_cd"
                     app:is_circle="true"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -65,11 +65,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
+                    android:id="@+id/rotate_hander"
                     android:layout_width="106dp"
                     android:layout_height="240dp"
-                    android:layout_marginLeft="19dp"
+                    android:layout_marginStart="19dp"
                     android:layout_marginBottom="79dp"
-                    android:src="@drawable/icon_dot_line"
+                    android:src="@drawable/rotate_hander"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView10"
                     app:layout_constraintStart_toEndOf="@+id/imageView10" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -132,8 +133,6 @@
                     android:layout_marginStart="35dp"
                     android:layout_marginTop="34dp"
                     android:layout_marginBottom="72dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
                     android:text="@{viewModel.albumName}"
                     android:textColor="#ff272b52"
                     android:textSize="36sp"
@@ -148,8 +147,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="36dp"
                     android:layout_marginTop="8dp"
-                    android:ellipsize="end"
-                    android:maxLines="1"
                     android:text="@{viewModel.nickName}"
                     android:textColor="#CC272B52"
                     android:textSize="24sp"

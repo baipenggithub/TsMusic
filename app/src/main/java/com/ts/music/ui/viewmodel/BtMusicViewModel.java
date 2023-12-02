@@ -398,8 +398,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
                 LogUtils.logD(TAG, "update play list");
                 setListHasData(true);
                 mCurrentPlayList = list;
-                mSumSongs.postValue(String.format(mContext.getString(R.string.sum_song),
-                        sum));
+                mSumSongs.postValue(String.format(mContext.getString(R.string.sum_song), sum));
                 mAudioData.postValue(list);
                 updatePlayList();
             }
@@ -465,8 +464,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         }
 
         if (mCurrentAudioInfo != null && null != mListener) {
-            mListener.onMusicPlayStateChanged(getIndexFromPlayList(mCurrentAudioInfo),
-                    mCurrentPlayState, getNickName().getValue());
+            mListener.onMusicPlayStateChanged(getIndexFromPlayList(mCurrentAudioInfo), mCurrentPlayState, getNickName().getValue());
         }
     }
 
@@ -502,11 +500,9 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
         return TIME_ERROR_CODE;
     }
 
+    @SuppressLint("DefaultLocale")
     private String timeFormatConversion(long time) {
-        return String.format(TIME_FORMAT,
-                TimeUnit.MILLISECONDS.toMinutes(time),
-                TimeUnit.MILLISECONDS.toSeconds(time)
-                        - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time)));
+        return String.format(TIME_FORMAT, TimeUnit.MILLISECONDS.toMinutes(time), TimeUnit.MILLISECONDS.toSeconds(time) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(time)));
     }
 
     private Boolean checkBluetoothStatus() {
@@ -751,7 +747,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     public void setBluetoothDeviceName(BluetoothDevice connectedDevice) {
         String deviceName = null;
         if (connectedDevice != null && !connectedDevice.getName().isEmpty()) {
-            LogUtils.logD(TAG,"setBluetoothDeviceName :"+connectedDevice.getName());
+            LogUtils.logD(TAG, "setBluetoothDeviceName :" + connectedDevice.getName());
             deviceName = connectedDevice.getName();
         } else {
             deviceName = mContext.getString(R.string.default_bt_device_name);
