@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat;
 import com.ts.music.base.BaseApplication;
 import com.ts.music.constants.MusicConstants;
 
+import java.lang.reflect.Method;
 import java.util.Set;
 
 public class CommonUtils {
@@ -97,10 +98,18 @@ public class CommonUtils {
     public static BluetoothDevice getConnectedDevice() {
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : bondedDevices) {
-            LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());
-            if (device.getBondState() == BluetoothDevice.BOND_BONDED && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
-                return device;
+            try {
+                Method isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected", (Class[]) null);
+                isConnectedMethod.setAccessible(true);
+                boolean isConnected = (boolean) isConnectedMethod.invoke(device, (Object[]) null);
+                LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());
+                if (isConnected && device.getBondState() == BluetoothDevice.BOND_BONDED && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+                    return device;
+                }
+            } catch (Exception e) {
+                LogUtils.logD("CommonUtils", "蓝牙获取异常---" + e.getMessage());
             }
+
         }
         return null;
     }
@@ -114,10 +123,19 @@ public class CommonUtils {
     public static boolean isExistConnectDevices() {
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
         for (BluetoothDevice device : bondedDevices) {
-            LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());
-            if (device.getBondState() == BluetoothDevice.BOND_BONDED && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
-                return true;
+            Method isConnectedMethod;
+            try {
+                isConnectedMethod = BluetoothDevice.class.getDeclaredMethod("isConnected", (Class[]) null);
+                isConnectedMethod.setAccessible(true);
+                boolean isConnected = (boolean) isConnectedMethod.invoke(device, (Object[]) null);
+                LogUtils.logD("CommonUtils", "getBondState: " + device.getBondState() + " ,getState() :" + mBluetoothAdapter.getState());
+                if (isConnected && device.getBondState() == BluetoothDevice.BOND_BONDED && mBluetoothAdapter.getState() == BluetoothAdapter.STATE_ON) {
+                    return true;
+                }
+            } catch (Exception e) {
+                LogUtils.logD("CommonUtils", "蓝牙获取异常---" + e.getMessage());
             }
+
         }
         return false;
     }

@@ -751,6 +751,7 @@ public class BtMusicViewModel extends BaseViewModel implements BtSongListAdapter
     public void setBluetoothDeviceName(BluetoothDevice connectedDevice) {
         String deviceName = null;
         if (connectedDevice != null && !connectedDevice.getName().isEmpty()) {
+            LogUtils.logD(TAG,"setBluetoothDeviceName :"+connectedDevice.getName());
             deviceName = connectedDevice.getName();
         } else {
             deviceName = mContext.getString(R.string.default_bt_device_name);
