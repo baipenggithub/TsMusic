@@ -28,6 +28,7 @@ import com.ts.music.ui.fragment.BtMusicFragment;
 import com.ts.music.ui.fragment.BtMusicFragmentCopy;
 import com.ts.music.ui.fragment.RadioFragment;
 import com.ts.music.ui.fragment.UsbMusicFragment;
+import com.ts.music.ui.fragment.UsbMusicFragmentCopy;
 import com.ts.music.ui.viewmodel.MusicActivityViewModel;
 import com.ts.music.utils.LogUtils;
 
@@ -49,7 +50,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
     private ActivityMainBinding mBinding;
     private MusicActivityViewModel mViewModel;
     private FragmentManager mFragmentManager;
-    private UsbMusicFragment mUsbPlayerFragment;
+    private UsbMusicFragmentCopy mUsbPlayerFragment;
     private BtMusicFragmentCopy mBtMusicMainFragment;
     private RadioFragment mRadioFragment;
 
@@ -229,7 +230,7 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
                 setTabBarBac(false, false, true);
                 if (null == mUsbPlayerFragment) {
                     LogUtils.logD(TAG, "switchFragment :: mUsbPlayerFragment");
-                    mUsbPlayerFragment = UsbMusicFragment.getInstance();
+                    mUsbPlayerFragment = UsbMusicFragmentCopy.getInstance();
                     transaction.add(R.id.content_frame_layout, mUsbPlayerFragment);
                 } else {
                     transaction.show(mUsbPlayerFragment);

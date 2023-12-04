@@ -10,8 +10,8 @@
         <RelativeLayout
             android:id="@+id/rl_top"
             android:layout_width="374dp"
-            android:layout_marginLeft="100dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -25,27 +25,27 @@
                     android:id="@+id/rb_allChannel"
                     android:layout_width="134dp"
                     android:layout_height="48dp"
+                    android:background="@android:color/transparent"
                     android:button="@null"
                     android:checked="true"
                     android:gravity="center|left"
                     android:text="All songs"
-                    android:background="@android:color/transparent"
-                    android:textStyle="bold"
                     android:textColor="@drawable/selector_toolbar"
-                    android:textSize="28dp" />
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
 
                 <RadioButton
                     android:id="@+id/rb_Favorite"
                     android:layout_width="160dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="98dp"
+                    android:background="@android:color/transparent"
                     android:button="@null"
                     android:gravity="left|center"
                     android:text="Folder"
-                    android:background="@android:color/transparent"
-                    android:textStyle="bold"
                     android:textColor="@drawable/selector_toolbar"
-                    android:textSize="28dp" />
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
             </RadioGroup>
         </RelativeLayout>
 
@@ -72,12 +72,28 @@
                 android:visibility="gone" />
         </LinearLayout>
 
-        <FrameLayout
-            android:id="@+id/frameLayout"
+        <!--        <FrameLayout-->
+        <!--            android:id="@+id/frameLayout"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="580dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/rl_top" />-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/all_songs_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="580dp"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/rl_top"/>
+            app:layout_constraintTop_toBottomOf="@+id/rl_top" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:visibility="gone"
+            android:id="@+id/folder_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="580dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@+id/rl_top" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/radio_item"
@@ -96,7 +112,7 @@
                 android:layout_marginTop="17dp"
                 android:src="@drawable/icon_usb_music"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textView"
@@ -135,7 +151,7 @@
                 android:src="@drawable/icon_usb_item_suiji"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView4"
@@ -145,7 +161,7 @@
                 android:src="@drawable/icon_previous_song_64"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -155,7 +171,7 @@
                 android:src="@drawable/icon_usb_player"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView4"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageView6"
@@ -165,7 +181,7 @@
                 android:src="@drawable/icon_next_64"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <ImageView
@@ -176,7 +192,7 @@
                 android:src="@drawable/icon_list_64"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView6"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -192,7 +208,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
+        <View
             android:layout_width="1396dp"
             android:layout_height="184dp"
             android:layout_marginTop="645dp"

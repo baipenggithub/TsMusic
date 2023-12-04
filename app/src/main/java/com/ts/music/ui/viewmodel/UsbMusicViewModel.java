@@ -391,7 +391,7 @@ public class UsbMusicViewModel extends BaseViewModel {
         }
     };
 
-    private IUsbMusicCallback mUsbMusicCallback = new IUsbMusicCallback.Stub() {
+    private final IUsbMusicCallback mUsbMusicCallback = new IUsbMusicCallback.Stub() {
         @Override
         public void onAudioStateChange(AudioInfoBean audioInfoBean) {
             // TODO Audio state change
@@ -577,6 +577,11 @@ public class UsbMusicViewModel extends BaseViewModel {
         } catch (RemoteException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void getAllSongList() throws RemoteException {
+        mAudioData.postValue(mUsbMusicManager.getAudioInfo(""));
+        LogUtils.logD(TAG, "getAllSongList=" + mUsbMusicManager.getAllAudio());
     }
 
     /**

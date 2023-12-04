@@ -41,7 +41,7 @@ public class AllsongsFragment extends Fragment {
 
     public void initLayout() {
         list = new ArrayList<>();
-        usbListAdapter = new USBListAdapter();
+       // usbListAdapter = new USBListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         list.add(new RadioBean("01", R.drawable.icon_item1,
                 "joe hisaishi","City of sky","1:53"));
