@@ -55,7 +55,7 @@ public class AllsongsFragment extends Fragment {
                 "Oasis","Stop Crying Your Heart Out","4:16"));
 
         mRecyclerView.setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);
-        usbListAdapter.setDataList(list);
+//        usbListAdapter.setDataList(list);
         mRecyclerView.setAdapter(usbListAdapter);
     }
 }

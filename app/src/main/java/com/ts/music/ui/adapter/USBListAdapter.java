@@ -25,93 +25,102 @@ import com.ts.sdk.media.bean.AudioInfoBean;
 import java.util.ArrayList;
 import java.util.List;
 
-public class USBListAdapter extends BaseRecyclerAdapter<AudioInfoBean, BaseRecyclerHolder> {
-    private final List<RadioBean> mRadioBeanList = new ArrayList<>();
-    private static final String TAG = "RadioListAdapter";
+public class USBListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private final List<AudioInfoBean> mUsbBeanList = new ArrayList<>();
+    private static final String TAG = "USBListAdapter";
     private int selectedItem = -1;
-
-    /**
-     * Initialization data.
-     *
-     * @param layoutResId
-     * @param data
-     */
-    public USBListAdapter(int layoutResId, @Nullable List<AudioInfoBean> data) {
-        super(layoutResId, data);
-    }
-
-    public void setDataList(List<RadioBean> list) {
-        mRadioBeanList.clear();
+    public void setDataList(List<AudioInfoBean> list) {
+        mUsbBeanList.clear();
         if (list != null) {
-            mRadioBeanList.addAll(list);
+            mUsbBeanList.addAll(list);
         }
+        notifyDataSetChanged();
+    }
+    public void clearData() {
+        mUsbBeanList.clear();
         notifyDataSetChanged();
     }
 
 
+    @NonNull
     @Override
-    protected void convert(BaseRecyclerHolder holder, AudioInfoBean item) {
-        LogUtils.logD(TAG, "AudioId:" + item.getAudioId() + ", name:" + item.getAudioName());
-        holder.itemView.setSelected(selectedItem == holder.getLayoutPosition());
-        holder.getView(R.id.radio_list_item).setOnClickListener(new View.OnClickListener() {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = null;
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usb_list, parent, false);
+        return new USBListAdapter.RadioViewHolder(view);
+
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ((USBListAdapter.RadioViewHolder) holder).bind(mUsbBeanList.get(position),holder.getAdapterPosition() );
+        holder.itemView.setSelected(selectedItem == position);
+//        Log.e(TAG, "onBindViewHolder: "+(selectedItem == position));
+        ((USBListAdapter.RadioViewHolder) holder).radio_list_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                notifyItemChanged(selectedItem);
-                selectedItem = holder.getLayoutPosition();
-                notifyItemChanged(selectedItem);
+                notifyItemChanged(selectedItem); // 取消上一次选中项的背景
+                selectedItem = position; // 设置当前选中项
+                notifyItemChanged(selectedItem); // 设置当前选中项的背景
+                if (mOnClickListener != null) {
+                    mOnClickListener.play(holder,mUsbBeanList.get(holder.getAdapterPosition()),holder.getAdapterPosition());
+                }
             }
         });
-        if (holder.itemView.isSelected()) {
-            holder.getView(R.id.tv_num).setVisibility(View.INVISIBLE);
-        } else {
-            holder.getView(R.id.tv_num).setVisibility(View.VISIBLE);
+        if (((USBListAdapter.RadioViewHolder) holder).itemView.isSelected()){
+            ((USBListAdapter.RadioViewHolder) holder).tv_num.setVisibility(View.INVISIBLE);
+        }else {
+            ((USBListAdapter.RadioViewHolder) holder).tv_num.setVisibility(View.VISIBLE);
         }
-
-        holder.setText(R.id.tv_num, String.valueOf(holder.getLayoutPosition() + 1));
-        holder.setText(R.id.tv_name, item.getAudioName());
-        holder.setText(R.id.tv_title, item.getAudioArtistName());
-        holder.setText(R.id.tv_time, item.getAddTime()+"");
-        Glide.with(holder.itemView.getContext())
-                .load(item.getAudioPath())
-                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
-                .placeholder(R.drawable.usb_music_ic_item_no_album)
-                .centerCrop()
-                .into((ImageView) holder.itemView.findViewById(R.id.imageView));
-
     }
-
-    @Override
-    protected void convert(BaseRecyclerHolder holder, AudioInfoBean item, List<Object> payloads) {
-
-    }
-
 
     @Override
     public int getItemCount() {
-        return mRadioBeanList.size();
+        return mUsbBeanList.size();
     }
 
     public static class RadioViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName, tvNum, tv_title, tv_time;
-        private ImageView imageView;
+        private TextView tvName , tvTitle,tvTime,tv_num;
         private ConstraintLayout radio_list_item;
 
         public RadioViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
-            tvNum = itemView.findViewById(R.id.tv_num);
-            tv_title = itemView.findViewById(R.id.tv_title);
-            imageView = itemView.findViewById(R.id.imageView);
-            tv_time = itemView.findViewById(R.id.tv_time);
+            tvTitle = itemView.findViewById(R.id.tv_title);
             radio_list_item = itemView.findViewById(R.id.radio_list_item);
+            tvTime = itemView.findViewById(R.id.tv_time);
+            tv_num = itemView.findViewById(R.id.tv_num);
         }
 
-        public void bind(RadioBean radioBean) {
-            tv_title.setText(radioBean.getTitle());
-            tvNum.setText(radioBean.getNum());
-            tvName.setText(radioBean.getName());
-            imageView.setImageResource(radioBean.getIcon());
-            tv_time.setText(radioBean.getTime());
+        public void bind(AudioInfoBean radioBean,int po) {
+            LogUtils.logD(TAG, "USBListAdapter :: bind");
+
+            tvTitle.setText(radioBean.getAudioName());
+            tvName.setText(radioBean.getAudioArtistName());
+
+            long audioDuration = radioBean.getAddTime();
+            int durationInSeconds = (int) (audioDuration / 1000); // 将毫秒转换为秒
+            int minutes = durationInSeconds / 60; // 计算分钟
+            int seconds = durationInSeconds % 60; // 计算剩余的秒数
+            String formattedDuration = String.format("%02d:%02d", minutes, seconds); // 格式化为分钟:秒的形式
+            LogUtils.logD(TAG, "USBListAdapter :: bind:formattedDuration" + formattedDuration);
+
+            tvTime.setText(formattedDuration);
+            if (getAbsoluteAdapterPosition() + 1 < 10) {
+                tv_num.setText("0" + (getAbsoluteAdapterPosition() + 1));
+            } else {
+                tv_num.setText(getAbsoluteAdapterPosition() + 1 +"");
+            }
         }
+    }
+
+    public interface OnClickListener {
+        void play( RecyclerView.ViewHolder holder, AudioInfoBean resultBean, int position);
+    }
+
+    private USBListAdapter.OnClickListener mOnClickListener;
+
+    public void setOnItemClickListener(USBListAdapter.OnClickListener onClickListener) {
+        mOnClickListener = onClickListener;
     }
 }

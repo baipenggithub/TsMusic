@@ -126,9 +126,12 @@ public class UsbMusicViewModel extends BaseViewModel {
                     mIsConnected.postValue(true);
                     mUsbDevices.postValue(mUsbMusicManager.getUsbDevices());
                     mUsbMusicManager.registerUsbDevicesStatusObserver(mUsbDevicesListener);
-                    mUsbMusicManager.getAllAudio();
-                    mIsInitQuerying = true;
+
                     mUsbMusicManager.registerVideoStatusObserver(mUsbMusicCallback);
+                    mUsbMusicManager.getAllAudio();
+
+
+                    mIsInitQuerying = true;
                     int playModel = mUsbMusicManager.getPlayerMode();
                     if (playModel > MusicConstants.PLAYER_STATUS_DESTROY) {
                         mModelDrawable.set(getDrawable(MusicUtils.getInstance()
@@ -409,6 +412,7 @@ public class UsbMusicViewModel extends BaseViewModel {
 
         @Override
         public void onAudioQueryCompleted(List<AudioInfoBean> list) {
+            LogUtils.logD(TAG, "mAudioData.observe :: invoke" + list.toString());
             mIsInitQuerying = false;
             mAudioData.postValue(list);
         }
