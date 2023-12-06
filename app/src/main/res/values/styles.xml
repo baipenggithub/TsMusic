@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowBackground">#00000000</item>
     </style>
 
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,7 +16,7 @@
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">false</item>
-        <item name="android:windowBackground">@color/colorBgBlack</item>
+        <item name="android:windowBackground">#00000000</item>
     </style>
 
     <!--Player time progress bar style-->
@@ -25,7 +25,7 @@
         <item name="android:layout_height">4dp</item>
         <item name="android:background">@null</item>
         <item name="android:progressDrawable">@drawable/music_bottom_seek_progress</item>
-        <item name="android:thumb">@null</item>
+        <item name="android:thumb">@drawable/bg_seekbar_thumb</item>
         <item name="android:splitTrack">false</item>
     </style>
 
@@ -67,6 +67,12 @@
         <item name="android:windowNoTitle">true</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
 </resources>

@@ -1,5 +1,6 @@
 package com.ts.music.ui.activity;
 
+import android.animation.AnimatorInflater;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
@@ -31,6 +32,9 @@ import com.ts.music.ui.fragment.UsbMusicFragment;
 import com.ts.music.ui.fragment.UsbMusicFragmentCopy;
 import com.ts.music.ui.viewmodel.MusicActivityViewModel;
 import com.ts.music.utils.LogUtils;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 
 /**
@@ -72,6 +76,11 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
         mFragmentManager = getSupportFragmentManager();
         mBinding.topTabBar.setOnCheckedChangeListener(this);
         initLayout();
+        if (!TextUtils.isEmpty(getIntent().getAction())
+                && getIntent().getAction().equals("com.ts.music.ui.RadioFragment")){
+            selectRadioBt(MusicConstants.RADIO_MUSIC);
+            sendMessage(MusicConstants.RADIO_MUSIC);
+        }
     }
 
     /**
@@ -107,6 +116,13 @@ public class MusicActivity extends AppCompatActivity implements RadioGroup.OnChe
             chooseFragment(intent, false);
         }
         mIsInit = false;
+
+
+        if (!TextUtils.isEmpty(getIntent().getAction())
+                && getIntent().getAction().equals("com.ts.music.ui.RadioFragment")){
+            selectRadioBt(MusicConstants.RADIO_MUSIC);
+            sendMessage(MusicConstants.RADIO_MUSIC);
+        }
     }
 
     private void initLayout() {

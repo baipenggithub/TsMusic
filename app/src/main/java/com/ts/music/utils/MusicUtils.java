@@ -248,10 +248,10 @@ public class MusicUtils {
         Bitmap bitmap;
         if (isListDefaultCover) {
             bitmap = BitmapFactory.decodeResource(BaseApplication.getApplication()
-                    .getResources(), R.drawable.usb_music_ic_item_no_album);
+                    .getResources(), R.drawable.icon_usb_item_def);
         } else {
             bitmap = BitmapFactory.decodeResource(BaseApplication.getApplication()
-                    .getResources(), R.drawable.usb_music_ic_player_no_album);
+                    .getResources(), R.drawable.icon_usb_item_def);
         }
         return bitmap;
     }

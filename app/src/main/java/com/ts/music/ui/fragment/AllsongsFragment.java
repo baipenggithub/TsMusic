@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ts.music.R;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 import com.ts.music.ui.adapter.USBListAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AllsongsFragment extends Fragment {
         return new AllsongsFragment();
     }
     private USBListAdapter usbListAdapter;
-    private List<RadioBean> list;
+    private List<Au> list;
     private RecyclerView mRecyclerView;
     private View view;
     @Nullable
@@ -43,15 +43,15 @@ public class AllsongsFragment extends Fragment {
         list = new ArrayList<>();
        // usbListAdapter = new USBListAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list.add(new RadioBean("01", R.drawable.icon_item1,
+        list.add(new Au("01", R.drawable.icon_item1,
                 "joe hisaishi","City of sky","1:53"));
-        list.add(new RadioBean("02",R.drawable.icon_item2,
+        list.add(new Au("02",R.drawable.icon_item2,
                 "Jake Miller","Parties","1:53"));
-        list.add(new RadioBean("03",R.drawable.icon_item3,
+        list.add(new Au("03",R.drawable.icon_item3,
                 "Jake Miller","Mad at Disney","2:50"));
-        list.add(new RadioBean("04",R.drawable.icon_item4,
+        list.add(new Au("04",R.drawable.icon_item4,
                 "Grapefruit Moon","New Coat Of Paint","1:53"));
-        list.add(new RadioBean("05",R.drawable.icon_item5,
+        list.add(new Au("05",R.drawable.icon_item5,
                 "Oasis","Stop Crying Your Heart Out","4:16"));
 
         mRecyclerView.setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);

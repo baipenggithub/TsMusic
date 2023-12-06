@@ -11,7 +11,7 @@ import com.ts.music.BR;
 import com.ts.music.R;
 import com.ts.music.base.BaseFragment;
 import com.ts.music.databinding.FragmentFavoriteBinding;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 import com.ts.music.ui.adapter.RadioFavoriteListAdapter;
 import com.ts.music.ui.viewmodel.AllChannelViewModel;
 
@@ -23,7 +23,7 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding, AllC
         return new FavoriteFragment();
     }
     private RadioFavoriteListAdapter radioListAdapter;
-    private List<RadioBean> list;
+    private List<Au> list;
     @Override
     public int initContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return R.layout.fragment_favorite;
@@ -41,7 +41,7 @@ public class FavoriteFragment extends BaseFragment<FragmentFavoriteBinding, AllC
         radioListAdapter = new RadioFavoriteListAdapter();
         mBinding.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         for (int i = 1; i < 50; i++) {
-            RadioBean radioBean = new RadioBean();
+            Au radioBean = new Au();
             radioBean.setName("FM103.7");
             if (i<10){
                 radioBean.setNum("0"+i);

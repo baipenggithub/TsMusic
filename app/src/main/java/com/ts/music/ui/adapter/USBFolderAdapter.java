@@ -10,16 +10,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ts.music.R;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class USBFolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<RadioBean> mRadioBeanList = new ArrayList<>();
+    private final List<Au> mRadioBeanList = new ArrayList<>();
     private static final String TAG = "RadioListAdapter";
     private int selectedItem = -1;
-    public void setDataList(List<RadioBean> list) {
+    public void setDataList(List<Au> list) {
         mRadioBeanList.clear();
         if (list != null) {
             mRadioBeanList.addAll(list);
@@ -75,7 +75,7 @@ public class USBFolderAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             radio_list_item = itemView.findViewById(R.id.radio_list_item);
         }
 
-        public void bind(RadioBean radioBean) {
+        public void bind(Au radioBean) {
             tv_title.setText(radioBean.getTitle());
             tvNum.setText(radioBean.getNum());
             tvName.setVisibility(View.GONE);

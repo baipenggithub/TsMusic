@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ts.music.R;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 import com.ts.music.ui.adapter.USBFolderAdapter;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class FolderFragment extends Fragment {
         return new FolderFragment();
     }
     private USBFolderAdapter usbFolderAdapter;
-    private List<RadioBean> list;
+    private List<Au> list;
     private RecyclerView mRecyclerView;
     private View view;
     @Nullable
@@ -44,15 +44,15 @@ public class FolderFragment extends Fragment {
         list = new ArrayList<>();
         usbFolderAdapter = new USBFolderAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        list.add(new RadioBean("01",R.drawable.icon_usb_list_item,
+        list.add(new Au("01",R.drawable.icon_usb_list_item,
                 "joe hisaishi","Collection of Mo Wenwei","526 pieces of music"));
-        list.add(new RadioBean("02",R.drawable.icon_usb_list_item,
+        list.add(new Au("02",R.drawable.icon_usb_list_item,
                 "Jake Miller","Collection of Jay Chou","289 pieces of music"));
-        list.add(new RadioBean("03",R.drawable.icon_usb_list_item,
+        list.add(new Au("03",R.drawable.icon_usb_list_item,
                 "Jake Miller","Collection of Chinese music lists","260 pieces of music"));
-        list.add(new RadioBean("04",R.drawable.icon_usb_list_item,
+        list.add(new Au("04",R.drawable.icon_usb_list_item,
                 "Grapefruit Moon","Eason Chan Cantonese Collection","260 pieces of music"));
-        list.add(new RadioBean("05",R.drawable.icon_usb_list_item,
+        list.add(new Au("05",R.drawable.icon_usb_list_item,
                 "Oasis","Folder 1","260 pieces of music"));
 
         mRecyclerView.setScrollBarStyle(SCROLLBARS_OUTSIDE_OVERLAY);

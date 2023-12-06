@@ -23,14 +23,15 @@
     <ImageView
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/selecctor_list_item_icon"
+        android:id="@+id/lottieAnimationView"
+        android:background="@drawable/animation_flower_night"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="34dp"
         android:layout_marginBottom="34dp"
-        android:layout_marginLeft="31dp"
-        ></ImageView>
+        android:layout_marginLeft="31dp" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"

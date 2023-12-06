@@ -1,24 +1,26 @@
 package com.ts.music.ui.adapter;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ts.music.R;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RadioListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private final List<RadioBean> mRadioBeanList = new ArrayList<>();
+    private final List<Au> mRadioBeanList = new ArrayList<>();
     private static final String TAG = "RadioListAdapter";
     private int selectedItem = -1;
-    public void setDataList(List<RadioBean> list) {
+    public void setDataList(List<Au> list) {
         mRadioBeanList.clear();
         if (list != null) {
             mRadioBeanList.addAll(list);
@@ -48,10 +50,21 @@ public class RadioListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 notifyItemChanged(selectedItem); // 设置当前选中项的背景
             }
         });
+
+        AnimationDrawable animationDrawable =
+                (AnimationDrawable) ((RadioViewHolder) holder).lottieAnimationView.getBackground();
+
+
         if (((RadioViewHolder) holder).itemView.isSelected()){
             ((RadioViewHolder) holder).tvNum.setVisibility(View.INVISIBLE);
+            ((RadioViewHolder) holder).lottieAnimationView.setVisibility(View.VISIBLE);
+            animationDrawable.setOneShot(false);
+            animationDrawable.start();
+
         }else {
             ((RadioViewHolder) holder).tvNum.setVisibility(View.VISIBLE);
+            ((RadioViewHolder) holder).lottieAnimationView.setVisibility(View.INVISIBLE);
+            animationDrawable.stop();
         }
     }
 
@@ -63,15 +76,17 @@ public class RadioListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     public static class RadioViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName , tvNum;
         private ConstraintLayout radio_list_item;
+        private ImageView lottieAnimationView;
 
         public RadioViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_num);
             tvNum = itemView.findViewById(R.id.tv_num);
             radio_list_item = itemView.findViewById(R.id.radio_list_item);
+            lottieAnimationView = itemView.findViewById(R.id.lottieAnimationView);
         }
 
-        public void bind(RadioBean radioBean) {
+        public void bind(Au radioBean) {
             tvName.setText(radioBean.getName());
             tvNum.setText(radioBean.getNum());
         }

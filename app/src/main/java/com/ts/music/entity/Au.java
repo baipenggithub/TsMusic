@@ -1,13 +1,13 @@
 package com.ts.music.entity;
 
-public class RadioBean {
+public class Au {
     private String num;
     private int icon;
     private String name;
     private String title;
     private String time;
 
-    public RadioBean(String num, int icon, String name, String title, String time) {
+    public Au(String num, int icon, String name, String title, String time) {
         this.num = num;
         this.icon = icon;
         this.name = name;
@@ -15,7 +15,7 @@ public class RadioBean {
         this.time = time;
     }
 
-    public RadioBean() {
+    public Au() {
     }
 
     public String getNum() {

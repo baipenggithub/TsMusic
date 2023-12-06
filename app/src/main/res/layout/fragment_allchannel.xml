@@ -1,12 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <androidx.constraintlayout.widget.ConstraintLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.scwang.smart.refresh.layout.SmartRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/smartrefreshlayout"
+        app:srlEnableRefresh="false">
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
+            android:layout_width="1400dp"
             android:layout_height="match_parent"
             android:id="@+id/mRecyclerView" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.ts.music.ui.fragment.SmartRefreshFooter
+            android:layout_width="1376dp"
+            android:layout_height="80dp"
+            android:background="@drawable/icon_refreshlayout_bg">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginRight="7.5dp"
+                    android:src="@drawable/icon_lodding"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Song loading"
+                    android:textColor="#6F74E5"
+                    android:textSize="30dp" />
+            </LinearLayout>
+        </com.ts.music.ui.fragment.SmartRefreshFooter>
+    </com.scwang.smart.refresh.layout.SmartRefreshLayout>
 </layout>

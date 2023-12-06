@@ -80,7 +80,7 @@ public class UsbMusicViewModel extends BaseViewModel {
     public ObservableField<String> mTotalTime = new ObservableField(
             getString(R.string.player_time_default));
     public ObservableField<Drawable> mPlayDrawable = new ObservableField(
-            getDrawable(R.drawable.play));
+            getDrawable(R.drawable.icon_usb_player));
     public ObservableField<Drawable> mLyricDrawable = new ObservableField(
             getDrawable(R.drawable.sheet));
     public ObservableField<Drawable> mModelDrawable = new ObservableField(
@@ -160,6 +160,8 @@ public class UsbMusicViewModel extends BaseViewModel {
         public SingleLiveEvent playerPlayOrPauseEvent = new SingleLiveEvent<>();
         public SingleLiveEvent playAllEvent = new SingleLiveEvent<>();
         public SingleLiveEvent folderBackEvent = new SingleLiveEvent<>();
+        public SingleLiveEvent last = new SingleLiveEvent<>();
+        public SingleLiveEvent next = new SingleLiveEvent<>();
     }
 
     // Back to folder
@@ -203,6 +205,7 @@ public class UsbMusicViewModel extends BaseViewModel {
                 LogUtils.logD(TAG, "playerLastMusic :: do");
                 mUsbMusicManager.playLastMusic();
                 mInitLrcView.postValue(true);
+                uiChangeObservable.last.call();
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
@@ -226,6 +229,7 @@ public class UsbMusicViewModel extends BaseViewModel {
                 LogUtils.logD(TAG, "playerNext :: do");
                 mUsbMusicManager.playNextMusic();
                 mInitLrcView.postValue(true);
+                uiChangeObservable.next.call();
             } catch (RemoteException ex) {
                 ex.printStackTrace();
             }
@@ -440,26 +444,26 @@ public class UsbMusicViewModel extends BaseViewModel {
                 case MusicConstants.MUSIC_PLAYER_PLAYING:
                     LogUtils.logD(TAG, "IMusicPlayerEventListener--->playing");
                     mNotifyDataSetChanged.postValue(true);
-                    mPlayDrawable.set(getDrawable(R.drawable.suspend));
+                    mPlayDrawable.set(getDrawable(R.drawable.icon_play));
                     mIsLrcViewPause.postValue(true);
                     break;
                 case MusicConstants.MUSIC_PLAYER_PAUSE:
                     LogUtils.logD(TAG, "IMusicPlayerEventListener--->pause");
                     mNotifyDataSetChanged.postValue(true);
-                    mPlayDrawable.set(getDrawable(R.drawable.play));
+                    mPlayDrawable.set(getDrawable(R.drawable.icon_usb_player));
                     mIsLrcViewPause.postValue(false);
                     break;
                 case MusicConstants.MUSIC_PLAYER_STOP:
                     LogUtils.logD(TAG, "IMusicPlayerEventListener--->stop");
                     mIsLrcViewPause.postValue(false);
                     mNotifyDataSetChanged.postValue(true);
-                    mPlayDrawable.set(getDrawable(R.drawable.play));
+                    mPlayDrawable.set(getDrawable(R.drawable.icon_usb_player));
                     mProgress.set(MusicConstants.DEFAULT_PLAYER_INDEX);
                     mCurrentTime.set(getString(R.string.player_time_default));
                     break;
                 default:
                     LogUtils.logD(TAG, "IMusicPlayerEventListener--->default");
-                    mPlayDrawable.set(getDrawable(R.drawable.play));
+                    mPlayDrawable.set(getDrawable(R.drawable.icon_usb_player));
                     break;
             }
         }

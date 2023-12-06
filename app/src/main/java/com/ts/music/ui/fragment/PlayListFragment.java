@@ -17,7 +17,7 @@ import com.ts.music.BR;
 import com.ts.music.R;
 import com.ts.music.base.BaseFragment;
 import com.ts.music.databinding.FragmentPlaylistBinding;
-import com.ts.music.entity.RadioBean;
+import com.ts.music.entity.Au;
 import com.ts.music.ui.adapter.RadioCurrentlyListAdapter;
 import com.ts.music.ui.viewmodel.PlayListViewModel;
 
@@ -30,7 +30,7 @@ public class PlayListFragment extends BaseFragment<FragmentPlaylistBinding , Pla
     }
 
     private RadioCurrentlyListAdapter radioListAdapter;
-    private List<RadioBean> list;
+    private List<Au> list;
     private Fragment currentFragment;
     private FragmentTransaction ft;
     private List<Fragment> fragmentList;
@@ -53,7 +53,7 @@ public class PlayListFragment extends BaseFragment<FragmentPlaylistBinding , Pla
         radioListAdapter = new RadioCurrentlyListAdapter();
         mBinding.mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         for (int i = 1; i < 50; i++) {
-            RadioBean radioBean = new RadioBean();
+            Au radioBean = new Au();
             radioBean.setName("FM103.7");
             if (i<10){
                 radioBean.setNum("0"+i);

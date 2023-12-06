@@ -72,7 +72,7 @@ public class MarqueeTextView extends AppCompatTextView {
         mContent = getText().toString();
         mPaint.setColor(getCurrentTextColor());
         mPaint.setTextSize(getTextSize());
-        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextAlign(Paint.Align.RIGHT);
         mPaint.getTextBounds(mContent, DEFAULT_START_TEXT_BOUNDS, mContent.length(), mRect);
         LogUtils.logD(TAG, "mContent : " + mContent);
     }
